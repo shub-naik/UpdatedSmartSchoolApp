@@ -12,17 +12,27 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class TeacherMainIndexActivity extends AppCompatActivity {
 
+
     SharedPreferences.Editor editor;
+    Teacher object;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main_index);
+
         Intent i = getIntent();
-        Teacher object = (Teacher) i.getSerializableExtra("TeacherObject");
+        object = (Teacher) i.getSerializableExtra("TeacherObject");
+
 
         //Getting Teacher Preferences
         SharedPreferences pref = getSharedPreferences("TeacherPreferences", 0);
@@ -48,7 +58,22 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
 
 
         // From Here We will create Horizontal Scroll and Show the Teacher User 2 menu items
+        LinearLayout studentAttendance = findViewById(R.id.StudentAttendance);
+        LinearLayout studentHomework = findViewById(R.id.StudentHomework);
 
+        studentHomework.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddHomeWorkFragment fragment = new AddHomeWorkFragment();
+                getSupportFragmentManager().beginTransaction().add(R.id.TeacherFrameContainer, fragment).commit();
+            }
+        });
+
+        studentAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
     }
 
