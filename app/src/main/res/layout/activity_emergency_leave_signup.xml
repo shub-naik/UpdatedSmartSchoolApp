@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.SchoolManagement.EmergencyLeaveSignupActivity">
+
+
+    <ImageView
+        android:id="@+id/EmergencyLeaveImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_photo_camera_black_24dp" />
+
+    <EditText
+        android:id="@+id/EmergencyLeaveSignupPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Your 10 digit Phone Number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/EmergencyLeaveSignupEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Email Address" />
+
+    <EditText
+        android:id="@+id/EmergencyLeaveSignupPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/EmergencyLeaveSignupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Signup" />
+</LinearLayout>

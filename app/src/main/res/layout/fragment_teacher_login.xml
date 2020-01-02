@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.SchoolManagement.TeacherLoginFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/grey"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@string/common_google_play_services_enable_title"
+            android:gravity="center"
+            android:text="Teacher Login "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/LTeacherPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="Enter Your 10 digit Phone Number"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/LTeacherPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter The Password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/LTeacherLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teacher Login" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
