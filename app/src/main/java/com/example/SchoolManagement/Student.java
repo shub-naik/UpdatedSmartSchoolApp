@@ -2,11 +2,13 @@ package com.example.SchoolManagement;
 
 public class Student {
 
-    String token ,imageuri, sname, sphone, sclass, ssection, sroll, saddress, smothername, email;
+    String token, imageuri, sname, sphone, sclass, ssection, sroll, saddress, smothername, email, password;
 
-    public Student(){}
+    public Student() {
+    }
 
-    public Student(String token ,String imageuri, String sname, String sphone, String sclass, String ssection, String sroll, String email, String saddress, String smothername) {
+    public Student(String token, String imageuri, String sname, String sphone, String sclass, String ssection, String sroll, String email, String saddress, String smothername, String password) {
+        this.password = password;
         this.token = token;
         this.imageuri = imageuri;
         this.sname = sname;
@@ -17,6 +19,14 @@ public class Student {
         this.sroll = sroll;
         this.saddress = saddress;
         this.smothername = smothername;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getToken() {

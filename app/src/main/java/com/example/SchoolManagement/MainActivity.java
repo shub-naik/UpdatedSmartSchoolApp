@@ -29,6 +29,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //Shared Preferences for Parent's Login if Parents is Already Login.
+        SharedPreferences pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
+
+        String ParentsPhone = pref.getString("ParentsPhoneNumber", null);
+
+        if (ParentsPhone != null) {
+            Intent ParentIntent = new Intent(MainActivity.this, ParentMainIndexActivity.class);
+            startActivity(ParentIntent);
+        }
+
+
         //Shared Preferences and Editor For Admin If Login Already .
         pref = getSharedPreferences("AdminPreferences", 0);
         editor = pref.edit();

@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TeacherMainIndexActivity" android:theme="@style/EmergencyLeave"></activity>
+        <activity android:name=".ParentMainIndexActivity"></activity>
+        <activity
+            android:name=".TeacherMainIndexActivity"
+            android:theme="@style/EmergencyLeave" />
         <activity
             android:name=".EmergencyLeaveMainIndexActivity"
             android:theme="@style/EmergencyLeave" />

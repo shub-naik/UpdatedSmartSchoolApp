@@ -89,6 +89,7 @@ public class AddStudent extends AppCompatActivity {
                     final EditText email = findViewById(R.id.StudentEmail);
                     final EditText mothersname = findViewById(R.id.StudentMotherName);
                     final EditText studentaddress = findViewById(R.id.StudentAddress);
+                    final EditText studentpassword = findViewById(R.id.StudentPassword);
 
                     ref.child(c).child(s).addListenerForSingleValueEvent(
                             new ValueEventListener() {
@@ -108,7 +109,7 @@ public class AddStudent extends AppCompatActivity {
                                                             // for Data Upload to the Database
                                                             Long RollNumber = dataSnapshot.getChildrenCount() + 1;
                                                             String RollNo = Long.toString(RollNumber);
-                                                            Student student = new Student(token, ImageDownloadUrl[0].toString(), sname.getText().toString(), p, c, s, RollNo, email.getText().toString(), studentaddress.getText().toString(), mothersname.getText().toString());
+                                                            Student student = new Student(token, ImageDownloadUrl[0].toString(), sname.getText().toString(), p, c, s, RollNo, email.getText().toString(), studentaddress.getText().toString(), mothersname.getText().toString(), studentpassword.getText().toString());
 
                                                             ref.child(c).child(s).child(p).setValue(student);
                                                         }

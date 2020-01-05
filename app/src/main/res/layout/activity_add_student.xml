@@ -69,6 +69,13 @@
         android:hint="Enter the Permanent Address"
         android:inputType="textPostalAddress" />
 
+    <EditText
+        android:id="@+id/StudentPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Create A Strong Password"
+        android:inputType="textPassword" />
+
 
     <Button
         android:id="@+id/StudentAdd"
