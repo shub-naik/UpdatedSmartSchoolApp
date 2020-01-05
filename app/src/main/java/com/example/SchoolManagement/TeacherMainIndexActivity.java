@@ -42,21 +42,6 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
         editor = pref.edit();
 
 
-        Toolbar t = findViewById(R.id.TeacherMainIndexToolbar);
-        t.setTitle("Teacher Main Index Page");
-        setSupportActionBar(t);
-
-        // For Navigation Back Button Press and moving to MainActivity
-        t.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor.remove("TeacherPhoneNumber").commit();
-                Intent i = new Intent(TeacherMainIndexActivity.this, MainActivity.class);
-                startActivity(i);
-            }
-        });
-
-
         // From Here We will create Horizontal Scroll and Show the Teacher User 2 menu items
         LinearLayout studentAttendance = findViewById(R.id.StudentAttendance);
         LinearLayout studentHomework = findViewById(R.id.StudentHomework);
@@ -65,17 +50,43 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AddHomeWorkFragment fragment = new AddHomeWorkFragment();
-                getSupportFragmentManager().beginTransaction().add(R.id.TeacherFrameContainer, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.TeacherFrameContainer, fragment).commit();
             }
         });
 
         studentAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AddStudentAttendance addStudentAttendance = new AddStudentAttendance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.TeacherFrameContainer, addStudentAttendance).commit();
             }
         });
 
+
+        // For Tool Bar
+        // for ToolBar
+        Toolbar t = findViewById(R.id.TeacherMainIndexToolbar);
+        t.setTitle("Teacher Main Index Page");
+
+        setSupportActionBar(t);
+
+        // For Navigation Back Button Press and moving to MainActivity
+        t.setNavigationOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                editor.remove("TeacherPhoneNumber").commit();
+                Intent i = new Intent(TeacherMainIndexActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
     }
+
+
+
 
 
     // For Menu in the ToolBar

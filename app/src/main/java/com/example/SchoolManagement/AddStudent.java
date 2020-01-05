@@ -90,7 +90,7 @@ public class AddStudent extends AppCompatActivity {
                     final EditText mothersname = findViewById(R.id.StudentMotherName);
                     final EditText studentaddress = findViewById(R.id.StudentAddress);
 
-                    ref.child(c).child(s).addValueEventListener(
+                    ref.child(c).child(s).addListenerForSingleValueEvent(
                             new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -106,7 +106,7 @@ public class AddStudent extends AppCompatActivity {
                                                         public void onSuccess(Uri uri) {
                                                             ImageDownloadUrl[0] = uri;
                                                             // for Data Upload to the Database
-                                                            Long RollNumber = dataSnapshot.getChildrenCount();
+                                                            Long RollNumber = dataSnapshot.getChildrenCount() + 1;
                                                             String RollNo = Long.toString(RollNumber);
                                                             Student student = new Student(token, ImageDownloadUrl[0].toString(), sname.getText().toString(), p, c, s, RollNo, email.getText().toString(), studentaddress.getText().toString(), mothersname.getText().toString());
 
