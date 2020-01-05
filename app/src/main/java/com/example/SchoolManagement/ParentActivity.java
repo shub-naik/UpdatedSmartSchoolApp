@@ -48,6 +48,10 @@ public class ParentActivity extends AppCompatActivity {
                                         SharedPreferences pref = getApplicationContext().getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
                                         SharedPreferences.Editor editor = pref.edit();
 
+                                        editor.putString("Classes", s.getSclass());
+                                        editor.putString("Section", s.getSsection());
+                                        editor.putString("Roll_No", s.getSroll());
+
                                         editor.putString("ParentsPhoneNumber", s.getSphone());
 
                                         editor.commit(); // commit changes
