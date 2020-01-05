@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AddStudentAttendance extends Fragment {
 
@@ -71,6 +73,21 @@ public class AddStudentAttendance extends Fragment {
             }
         });
 
+        Button submit_attendance = view.findViewById(R.id.SubmitAttendance);
+        submit_attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference ref_attendance = FirebaseDatabase.getInstance().getReference("StudentAttendance");
+                String TodaysDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "-" + Calendar.getInstance().get(Calendar.MONTH) + "-" + Calendar.getInstance().get(Calendar.YEAR);
+
+
+                // Changes to be Done here for setting the Value
+                ref_attendance.child(classes.getSelectedItem().toString()).child(section.getSelectedItem().toString())
+                        .child(TodaysDate);
+
+            }
+        });
+
 
         return view;
     }
@@ -83,11 +100,9 @@ public class AddStudentAttendance extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 studentList.clear();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    Log.e("Error", d + "");
                     Student s = d.getValue(Student.class);
                     studentList.add(s);
                 }
-
                 addStudentAttendanceAdapter = new AttendanceStudentListHolder(getContext(), studentList);
                 list.setAdapter(addStudentAttendanceAdapter);
             }

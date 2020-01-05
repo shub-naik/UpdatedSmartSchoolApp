@@ -29,7 +29,13 @@
     <ListView
         android:id="@+id/StudentsAttendanceListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/SubmitAttendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Attendance" />
 
 </LinearLayout>
 

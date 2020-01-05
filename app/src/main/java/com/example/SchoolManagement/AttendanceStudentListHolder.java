@@ -4,19 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttendanceStudentListHolder extends BaseAdapter {
 
-    private final List<Student> student;
-    private final Context context;
+    List<Student> student;
+    Context context;
+
+    // ArrayList For Storing the List Of Students Present for the Current Date
+    ArrayList<String> PresentList = new ArrayList<>();
 
 
     public AttendanceStudentListHolder(Context context, List<Student> student) {
@@ -30,14 +33,25 @@ public class AttendanceStudentListHolder extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.students_list_item, parent, false);
 
-        TextView roll = view.findViewById(R.id.AttendanceStudentRoll);
+        final TextView roll = view.findViewById(R.id.AttendanceStudentRoll);
         TextView name = view.findViewById(R.id.AttendanceStudentName);
         CheckBox checkBox = view.findViewById(R.id.AttendanceStatus);
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(context, isChecked + "Checked " + position, Toast.LENGTH_SHORT).show();
+                if (isChecked) {
+                    if (PresentList.contains(roll.getText().toString())) {
+
+                    } else {
+                        PresentList.add(roll.getText().toString());
+                    }
+                } else {
+                    PresentList.remove(new String(roll.getText().toString()));
+                }
+
+                returnPresentList();
+//                Toast.makeText(context, isChecked + "Checked " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -68,4 +82,13 @@ public class AttendanceStudentListHolder extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+
+
+    public ArrayList<String> returnPresentList() {
+        Toast.makeText(context, "" + PresentList, Toast.LENGTH_SHORT).show();
+        return PresentList;
+    }
+
 }
+
+
