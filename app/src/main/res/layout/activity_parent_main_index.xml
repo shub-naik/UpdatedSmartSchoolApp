@@ -7,4 +7,14 @@
     android:orientation="vertical"
     tools:context="com.example.SchoolManagement.ParentMainIndexActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ParentMainIndexToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/EmergencyLeave"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/ToolbarColor" />
+
 </LinearLayout>
