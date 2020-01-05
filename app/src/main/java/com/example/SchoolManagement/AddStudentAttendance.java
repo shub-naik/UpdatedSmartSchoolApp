@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AddStudentAttendance extends Fragment {
+public class AddStudentAttendance extends Fragment implements AttendanceStudentListHolder.AddStudentAdapterEvents {
 
 
     AttendanceStudentListHolder addStudentAttendanceAdapter;
@@ -33,6 +33,10 @@ public class AddStudentAttendance extends Fragment {
     ListView list;
     Spinner classes;
     Spinner section;
+
+
+    ArrayList<String> PresentList;
+    String presentListString;
 
     public AddStudentAttendance() {
         // Required empty public constructor
@@ -78,12 +82,18 @@ public class AddStudentAttendance extends Fragment {
             @Override
             public void onClick(View v) {
                 DatabaseReference ref_attendance = FirebaseDatabase.getInstance().getReference("StudentAttendance");
-                String TodaysDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "-" + Calendar.getInstance().get(Calendar.MONTH) + "-" + Calendar.getInstance().get(Calendar.YEAR);
+                String TodaysDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.YEAR);
 
 
-                // Changes to be Done here for setting the Value
-                ref_attendance.child(classes.getSelectedItem().toString()).child(section.getSelectedItem().toString())
-                        .child(TodaysDate);
+                if (PresentList.isEmpty()) {
+                    // Changes to be Done here for setting the Value
+                    ref_attendance.child(classes.getSelectedItem().toString()).child(section.getSelectedItem().toString())
+                            .child(TodaysDate).setValue(presentListString);
+                } else {
+                    // Changes to be Done here for setting the Value
+                    ref_attendance.child(classes.getSelectedItem().toString()).child(section.getSelectedItem().toString())
+                            .child(TodaysDate).setValue(PresentList);
+                }
 
             }
         });
@@ -103,7 +113,7 @@ public class AddStudentAttendance extends Fragment {
                     Student s = d.getValue(Student.class);
                     studentList.add(s);
                 }
-                addStudentAttendanceAdapter = new AttendanceStudentListHolder(getContext(), studentList);
+                addStudentAttendanceAdapter = new AttendanceStudentListHolder(getContext(), studentList, AddStudentAttendance.this);
                 list.setAdapter(addStudentAttendanceAdapter);
             }
 
@@ -115,4 +125,13 @@ public class AddStudentAttendance extends Fragment {
 
     }
 
+    @Override
+    public void gettingArraylist(ArrayList arrayList) {
+        if (arrayList.isEmpty()) {
+            presentListString = "No One Present";
+        } else {
+            PresentList = arrayList;
+        }
+
+    }
 }

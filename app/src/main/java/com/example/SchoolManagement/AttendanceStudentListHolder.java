@@ -18,12 +18,15 @@ public class AttendanceStudentListHolder extends BaseAdapter {
     List<Student> student;
     Context context;
 
+    // For Sending Data
+    AddStudentAdapterEvents events;
+
     // ArrayList For Storing the List Of Students Present for the Current Date
     ArrayList<String> PresentList = new ArrayList<>();
 
-
-    public AttendanceStudentListHolder(Context context, List<Student> student) {
+    public AttendanceStudentListHolder(Context context, List<Student> student, AddStudentAdapterEvents events) {
         this.context = context;
+        this.events = events;
         this.student = student;
     }
 
@@ -42,7 +45,6 @@ public class AttendanceStudentListHolder extends BaseAdapter {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     if (PresentList.contains(roll.getText().toString())) {
-
                     } else {
                         PresentList.add(roll.getText().toString());
                     }
@@ -50,13 +52,12 @@ public class AttendanceStudentListHolder extends BaseAdapter {
                     PresentList.remove(new String(roll.getText().toString()));
                 }
 
-                returnPresentList();
-//                Toast.makeText(context, isChecked + "Checked " + position, Toast.LENGTH_SHORT).show();
+                events.gettingArraylist(PresentList);
+
             }
         });
 
         Student s = student.get(position);
-
         roll.setText(s.getSroll());
         name.setText(s.getSname());
 
@@ -84,11 +85,9 @@ public class AttendanceStudentListHolder extends BaseAdapter {
     }
 
 
-    public ArrayList<String> returnPresentList() {
-        Toast.makeText(context, "" + PresentList, Toast.LENGTH_SHORT).show();
-        return PresentList;
+    public interface AddStudentAdapterEvents {
+        void gettingArraylist(ArrayList<String> arrayList);
     }
-
 }
 
 
