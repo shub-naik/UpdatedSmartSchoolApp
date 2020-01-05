@@ -31,13 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Shared Preferences for Parent's Login if Parents is Already Login.
-        SharedPreferences pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
+        pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
 
 
-        String ParentsPhone = pref.getString("ParentsPhoneNumber", null);
-
-        if (ParentsPhone != null) {
+        if (pref.getString("ParentsPhoneNumber", null) != null) {
             Intent ParentIntent = new Intent(MainActivity.this, ParentMainIndexActivity.class);
             startActivity(ParentIntent);
         }

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class ParentMainIndexActivity extends AppCompatActivity {
 
@@ -27,20 +28,10 @@ public class ParentMainIndexActivity extends AppCompatActivity {
 
 
         String ParentsPhone = pref.getString("ParentsPhoneNumber", null);
-
-
         Toolbar t = findViewById(R.id.ParentMainIndexToolbar);
-        t.setTitle("Main Index Page");
         setSupportActionBar(t);
-        // For Navigation Back Button Press and moving to MainActivity
-        t.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pref.edit().remove("EmergencyPhoneNumber").commit();
-                Intent i = new Intent(ParentMainIndexActivity.this, MainActivity.class);
-                startActivity(i);
-            }
-        });
+
+
     }
 
     // For Menu in the ToolBar
@@ -55,11 +46,8 @@ public class ParentMainIndexActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                pref.edit().remove("EmergencyPhoneNumber").commit();
-                Intent intent = new Intent(ParentMainIndexActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-                break;
+                pref.edit().remove("ParentsPhoneNumber");
+                startActivity(new Intent(ParentMainIndexActivity.this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
