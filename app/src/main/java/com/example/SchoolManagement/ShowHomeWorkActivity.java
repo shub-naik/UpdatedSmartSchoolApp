@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class ShowHomeWorkActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ShowHomeWorkAdapter showHomeWorkAdapter;
     private List<ShowHomeWorkModel> list = new ArrayList<>();
+    int flag = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -59,19 +61,27 @@ public class ShowHomeWorkActivity extends AppCompatActivity {
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final String TodaysDate = Today.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"));
 
+        final ProgressDialog progress = new ProgressDialog(this);
+        progress.setTitle("Loading Please Wait...");
+        progress.setMessage("Your HomeWork Section is Loading");
+        progress.setCancelable(false);
+        progress.show();
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("HomeWork");
         ref.child(Classes).child(Section).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    latestHomeWork.setVisibility(View.VISIBLE);
                     list.clear();
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
-
                         String TeacherName = d1.getKey().split("==>")[0];
                         for (DataSnapshot d2 : d1.getChildren()) {
                             String split_key[] = d2.getKey().split(" ");
                             if (TodaysDate.compareTo(split_key[split_key.length - 1]) <= 0) {
+                                if (flag == 0) {
+                                    flag = 1;
+                                    latestHomeWork.setVisibility(View.VISIBLE);
+                                }
                                 // Show Your HomeWork Part Here
                                 Map<String, Object> message = (Map<String, Object>) d2.getValue();
 
@@ -83,13 +93,16 @@ public class ShowHomeWorkActivity extends AppCompatActivity {
                                 ShowHomeWorkModel showHomeWorkModel = new ShowHomeWorkModel(teachername, subject, deadline, remarks);
                                 list.add(showHomeWorkModel);
 
-                            } else {
-                                Log.e("DateError", "None To Show");
                             }
                         }
                     }
+                    if (flag == 0) {
+                        TextView noMoreHomeWork = findViewById(R.id.NoMoreHomeWork);
+                        noMoreHomeWork.setVisibility(View.VISIBLE);
+                    }
                     showHomeWorkAdapter = new ShowHomeWorkAdapter(ShowHomeWorkActivity.this, list);
                     recyclerView.setAdapter(showHomeWorkAdapter);
+                    progress.dismiss();
                 }
             }
 

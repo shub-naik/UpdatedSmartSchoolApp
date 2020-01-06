@@ -32,18 +32,29 @@ public class ParentMainIndexActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_main_index);
+        pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
+        final SharedPreferences.Editor editor = pref.edit();
+
+        // Toolbar
+        Toolbar t = findViewById(R.id.ParentMainIndexToolbar);
+        t.setTitle("Parent Main Index Page");
+        setSupportActionBar(t);
+
+        // For Navigation Back Button Press and moving to MainActivity
+        t.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.remove("ParentsPhoneNumber").commit();
+                Intent i = new Intent(ParentMainIndexActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         CardView homework = findViewById(R.id.Homework);
         txtAttendanceStatus = findViewById(R.id.TodayAttendanceStatus);
 
 
-        pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
-
-
         String ParentsPhone = pref.getString("ParentsPhoneNumber", null);
-        Toolbar t = findViewById(R.id.ParentMainIndexToolbar);
-        setSupportActionBar(t);
 
         String Classes = pref.getString("Classes", null);
         String Section = pref.getString("Section", null);
@@ -102,8 +113,9 @@ public class ParentMainIndexActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                pref.edit().remove("ParentsPhoneNumber");
+                pref.edit().remove("ParentsPhoneNumber").commit();
                 startActivity(new Intent(ParentMainIndexActivity.this, MainActivity.class));
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }
