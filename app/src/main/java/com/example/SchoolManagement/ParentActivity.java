@@ -94,6 +94,9 @@ public class ParentActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         progress.dismiss();
+                        CoordinatorLayout coordinatorLayout = findViewById(R.id.ParentLoginCoordinatorLayout);
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout, Html.fromHtml("<font color=\"#F44336\">DataBase Error Occured</font>"), Snackbar.LENGTH_LONG);
+                        snackbar.show();
                     }
                 });
             }

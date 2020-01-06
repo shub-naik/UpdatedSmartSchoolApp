@@ -15,7 +15,7 @@
         <activity android:name=".ShowHomeWorkActivity"></activity>
         <activity
             android:name=".ParentMainIndexActivity"
-            android:theme="@style/EmergencyLeave" />
+            android:theme="@style/ParentMainIndex" />
         <activity
             android:name=".TeacherMainIndexActivity"
             android:theme="@style/EmergencyLeave" />

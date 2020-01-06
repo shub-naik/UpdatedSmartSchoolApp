@@ -37,7 +37,7 @@ public class ParentMainIndexActivity extends AppCompatActivity {
 
         // Toolbar
         Toolbar t = findViewById(R.id.ParentMainIndexToolbar);
-        t.setTitle("Parent Main Index Page");
+        t.setTitle("Parent MainIndex");
         setSupportActionBar(t);
 
         // For Navigation Back Button Press and moving to MainActivity
@@ -105,7 +105,7 @@ public class ParentMainIndexActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.parentmenu, menu);
         return true;
     }
 
