@@ -3,8 +3,10 @@ package com.example.SchoolManagement;
 
 import android.app.DatePickerDialog;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,7 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -32,18 +40,29 @@ public class AddHomeWorkFragment extends Fragment {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final String[] formattedDate = new String[1];
+
         // Inflate the layout for this fragment
         final View view1 = inflater.inflate(R.layout.fragment_add_home_work, container, false);
         final Spinner classes = view1.findViewById(R.id.HomeworkClasses);
         final Spinner section = view1.findViewById(R.id.HomeworkSection);
 
 
+// Todays Date
+        LocalDate Today = LocalDate.of(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH) + 1,
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        final String TodaysDate = Today.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"));
+
+
         // For Chooosing the Deadline Date for HomeWork Submission
         final Button chooseDeadline = (Button) view1.findViewById(R.id.ChooseDeadline);
-        chooseDeadline.setText(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.YEAR));
+        chooseDeadline.setText("Choose DeadLine");
 
 
         chooseDeadline.setOnClickListener(new View.OnClickListener() {
@@ -51,9 +70,12 @@ public class AddHomeWorkFragment extends Fragment {
             public void onClick(View v) {
                 final DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                         new DatePickerDialog.OnDateSetListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                chooseDeadline.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+                                LocalDate deadline_date = LocalDate.of(year, month + 1, dayOfMonth);
+                                formattedDate[0] = deadline_date.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"));
+                                chooseDeadline.setText(formattedDate[0]);
                             }
                         },
                         Calendar.getInstance().get(Calendar.YEAR),
@@ -90,7 +112,7 @@ public class AddHomeWorkFragment extends Fragment {
 
                 map.put("Deadline", chooseDeadline.getText().toString());
 
-                String Node = "Subject : " + Subject.getText().toString() + " On :" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.YEAR) + "-------->" + "Due Date is " + chooseDeadline.getText().toString();
+                String Node = "Subject : " + Subject.getText().toString() + " On : " + TodaysDate + " and DeadLine : " + formattedDate[0];
 
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("HomeWork");
                 ref.child(c).child(s).child(t.getName() + "==>" + t.getPhone())

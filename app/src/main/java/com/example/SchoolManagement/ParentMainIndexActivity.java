@@ -3,18 +3,17 @@ package com.example.SchoolManagement;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ParentMainIndexActivity extends AppCompatActivity {
@@ -35,6 +33,7 @@ public class ParentMainIndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_main_index);
 
+        CardView homework = findViewById(R.id.Homework);
         txtAttendanceStatus = findViewById(R.id.TodayAttendanceStatus);
 
 
@@ -55,7 +54,7 @@ public class ParentMainIndexActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("StudentAttendance");
 
 
-        ref.child(Classes).child(Section).child(TodaysDate).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child(Classes).child(Section).child(TodaysDate).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int flag = 0;
@@ -80,6 +79,14 @@ public class ParentMainIndexActivity extends AppCompatActivity {
             }
         });
 
+        // Opening Fragment on Click of Homework CardView
+        homework.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ParentMainIndexActivity.this, ShowHomeWorkActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
