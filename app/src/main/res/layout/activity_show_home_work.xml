@@ -7,6 +7,17 @@
     android:orientation="vertical"
     tools:context="com.example.SchoolManagement.ShowHomeWorkActivity">
 
+    <TextView
+        android:id="@+id/txtLatestHomeWork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="Latest/Upcoming Homework's"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewShowHomeWork"
         android:layout_width="match_parent"

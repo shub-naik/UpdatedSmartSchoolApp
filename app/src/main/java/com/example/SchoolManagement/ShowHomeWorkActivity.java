@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +39,8 @@ public class ShowHomeWorkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_home_work);
 
+        final TextView latestHomeWork = findViewById(R.id.txtLatestHomeWork);
+
         recyclerView = findViewById(R.id.RecyclerViewShowHomeWork);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,6 +64,7 @@ public class ShowHomeWorkActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    latestHomeWork.setVisibility(View.VISIBLE);
                     list.clear();
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
 

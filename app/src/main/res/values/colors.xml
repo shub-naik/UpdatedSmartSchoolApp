@@ -9,4 +9,5 @@
     <color name="ToolbarColor">#ffffff</color>
     <color name="grey">#ADA2A2</color>
     <color name="bus_status">#C48912</color>
+    <color name="show_homework">#EBE8E2</color>
 </resources>
