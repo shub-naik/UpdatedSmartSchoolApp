@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,11 +28,19 @@ public class ParentMainIndexActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     TextView txtAttendanceStatus;
+    Intent NotificationIntent;
+    String body = "";
+    String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_main_index);
+
+        NotificationIntent = getIntent();
+        title = NotificationIntent.getStringExtra("Title");
+        body = NotificationIntent.getStringExtra("Body");
+
         pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
         final SharedPreferences.Editor editor = pref.edit();
 
@@ -116,6 +125,11 @@ public class ParentMainIndexActivity extends AppCompatActivity {
                 pref.edit().remove("ParentsPhoneNumber").commit();
                 startActivity(new Intent(ParentMainIndexActivity.this, MainActivity.class));
                 finish();
+                break;
+            case R.id.ParentNotifications:
+                Log.e("Title", title);
+                Log.e("Title", body);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
