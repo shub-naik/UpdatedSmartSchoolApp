@@ -59,15 +59,20 @@
                 android:hint="Enter Your Password"
                 android:inputType="textPassword" />
 
-            <Button
+            <CheckBox
+                android:id="@+id/ShowHidePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show/Hide Password"
+                android:textColor="@color/colorPrimaryDark" />
 
+            <Button
                 android:id="@+id/ButtonParentLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_buttons"
                 android:text="Login"
-                android:textAllCaps="false"
-                android:textColor="#ffffff" />
+                android:textAllCaps="false" />
         </LinearLayout>
 
         <TextView

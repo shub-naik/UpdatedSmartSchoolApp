@@ -11,14 +11,19 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,17 +33,30 @@ import com.google.firebase.database.ValueEventListener;
 public class ParentActivity extends AppCompatActivity {
 
     int flag = 0;
+    EditText phone, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent);
 
+        CheckBox show_hide_password = findViewById(R.id.ShowHidePassword);
+        phone = findViewById(R.id.edtParentPhoneNumber);
+        password = findViewById(R.id.edtParentPassword);
+
+        show_hide_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
         final ProgressDialog progress = new ProgressDialog(ParentActivity.this);
 
-
-        final EditText phone = findViewById(R.id.edtParentPhoneNumber);
-        final EditText password = findViewById(R.id.edtParentPassword);
         Button login = findViewById(R.id.ButtonParentLogin);
 
         login.setOnClickListener(new View.OnClickListener() {
