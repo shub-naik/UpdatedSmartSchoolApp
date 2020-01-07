@@ -10,7 +10,6 @@
         android:padding="10dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,12 +44,18 @@
                 android:id="@+id/edtParentPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:hint="Enter Your Phone Number" />
 
             <EditText
                 android:id="@+id/edtParentPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/password_visible"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:hint="Enter Your Password" />
 
             <Button
@@ -69,11 +74,11 @@
             android:gravity="center"
             android:text="Parent's / Student's Login"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/red" />
+            android:textColor="@color/ToolbarColor" />
 
         <ImageView
             android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_height="125dp"
             android:layout_above="@+id/ParentLoginSymbol"
             android:layout_centerHorizontal="true"
             android:src="@drawable/login_icon" />
