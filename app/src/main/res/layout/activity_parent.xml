@@ -4,42 +4,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.example.SchoolManagement.ParentActivity">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
-        <TextView
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.example.SchoolManagement.ParentActivity">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/login_design_color" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/LayoutParentLoginInputs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/edtParentPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Your Phone Number" />
+
+            <EditText
+                android:id="@+id/edtParentPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Your Password" />
+
+            <Button
+                android:id="@+id/ButtonParentLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ParentLoginSymbol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LayoutParentLoginInputs"
             android:gravity="center"
-            android:text="Parent's / Student's Login "
+            android:text="Parent's / Student's Login"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/red" />
 
-        <EditText
-            android:id="@+id/edtParentPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Your Phone Number" />
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/ParentLoginSymbol"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/login_icon" />
 
-        <EditText
-            android:id="@+id/edtParentPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Your Password" />
 
-        <Button
-            android:id="@+id/ButtonParentLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login" />
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
