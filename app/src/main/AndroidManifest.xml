@@ -33,7 +33,8 @@
         <activity android:name=".TeacherManagement" />
         <activity
             android:name=".AdminIndex"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/LoginScreen" />
         <activity
             android:name=".ParentActivity"
             android:parentActivityName=".MainActivity"
