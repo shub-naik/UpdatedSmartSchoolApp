@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
 
 
-        if (pref.getString("ParentsPhoneNumber", null) != null) {
+        if (pref.getString("ParentsPhon" +
+                "eNumber", null) != null) {
             Intent ParentIntent = new Intent(MainActivity.this, ParentMainIndexActivity.class);
             startActivity(ParentIntent);
         }
