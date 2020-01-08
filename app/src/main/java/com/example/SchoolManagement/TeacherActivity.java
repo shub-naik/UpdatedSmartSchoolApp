@@ -26,7 +26,6 @@ public class TeacherActivity extends AppCompatActivity {
 
 
     FrameLayout frameLayout;
-    LinearLayout linearLayout;
     CoordinatorLayout coordinatorLayout;
 
     @Override
