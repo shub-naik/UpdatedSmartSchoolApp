@@ -2,12 +2,15 @@ package com.example.SchoolManagement;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -24,6 +27,7 @@ public class TeacherActivity extends AppCompatActivity {
 
     FrameLayout frameLayout;
     LinearLayout linearLayout;
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,7 @@ public class TeacherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher);
 
         frameLayout = findViewById(R.id.TeacherFrameContainer);
-        linearLayout = findViewById(R.id.LTeacherLinearLayout);
+        coordinatorLayout = findViewById(R.id.TeacherCoordinatorLayout);
 
         // Fragment for Teacher Login.
         TeacherLoginFragment login = new TeacherLoginFragment();
@@ -40,10 +44,12 @@ public class TeacherActivity extends AppCompatActivity {
     }
 
     public void GetDataFromFragment(final String Phone, final String Password) {
+        final ProgressDialog progress = new ProgressDialog(TeacherActivity.this);
+        progress.setTitle("Validating Please Wait...");
+        progress.setMessage("Your Credentials are Validating");
+        progress.setCancelable(false);
+        progress.show();
         if (!Phone.isEmpty() && !Password.isEmpty()) {
-            ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setMessage("Validating...." + "\n" + "Please Wait....");
-            dialog.show();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("TeachersPrimaryData");
             Query query = ref.orderByKey().equalTo(Phone);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -51,7 +57,6 @@ public class TeacherActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
                         Teacher teacher_object = d1.getValue(Teacher.class);
-
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("TeacherPreferences", 0); // 0 - for private mode
                         SharedPreferences.Editor editor = pref.edit();
 
@@ -59,12 +64,17 @@ public class TeacherActivity extends AppCompatActivity {
                         editor.putString("TeacherPhoneNumber", Phone);
 
                         editor.commit(); // commit changes
+                        progress.dismiss();
 
                         Intent i = new Intent(TeacherActivity.this, TeacherMainIndexActivity.class);
                         i.putExtra("TeacherObject", teacher_object);
                         startActivity(i);
                         finish();
                     }
+                    progress.dismiss();
+                    CoordinatorLayout coordinatorLayout = findViewById(R.id.TeacherCoordinatorLayout);
+                    Snackbar snackbar = Snackbar.make(coordinatorLayout, Html.fromHtml("<font color=\"#F44336\">Invalid Login , Please Enter Correct Credentails</font>"), Snackbar.LENGTH_LONG);
+                    snackbar.show();
                 }
 
                 @Override
@@ -72,9 +82,6 @@ public class TeacherActivity extends AppCompatActivity {
 
                 }
             });
-            dialog.dismiss();
-        } else {
-            Snackbar.make(linearLayout, "All Fields Are Mandatory Or Invalid Details", Snackbar.LENGTH_LONG).show();
         }
     }
 }
