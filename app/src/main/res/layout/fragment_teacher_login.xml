@@ -5,47 +5,104 @@
     tools:context="com.example.SchoolManagement.TeacherLoginFragment">
 
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/TeacherLoginCoordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@color/grey"
-        android:orientation="vertical"
-        android:padding="30dp">
+        android:layout_height="match_parent">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@string/common_google_play_services_enable_title"
-            android:gravity="center"
-            android:text="Teacher Login "
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:padding="10dp">
 
-        <EditText
-            android:id="@+id/LTeacherPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:ems="10"
-            android:hint="Enter Your 10 digit Phone Number"
-            android:inputType="phone" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/LTeacherPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter The Password"
-            android:inputType="textPassword" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/login_design_color" />
 
-        <Button
-            android:id="@+id/LTeacherLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Teacher Login" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/LayoutParentLoginInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/LTeacherPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_phone_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:hint="Enter Your Phone Number" />
+
+                <EditText
+                    android:id="@+id/LTeacherPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/password_visible"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:hint="Enter Your Password"
+                    android:inputType="textPassword" />
+
+                <CheckBox
+                    android:id="@+id/ShowHideTeacherPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show/Hide Password"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <Button
+                    android:id="@+id/LTeacherLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_buttons"
+                    android:text="Login"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/TeacherLoginImage"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/login_icon"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/ParentLoginSymbol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TeacherLoginImage"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Teacher's Login"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/ToolbarColor" />
 
 
+        </RelativeLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>
