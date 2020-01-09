@@ -81,9 +81,10 @@ public class AdminIndex extends AppCompatActivity {
                     case "Bus Management":
                         i = new Intent(AdminIndex.this, BusManagementActivity.class);
                         startActivity(i);
-//                    case "Emenrgency Leave":
-//                        i = new Intent(AdminIndex.this, TeacherManagement.class);
-//                        startActivity(i);
+                        break;
+                    case "Emergency Leave":
+                        i = new Intent(AdminIndex.this, EmergencyLeaveSignupActivity.class);
+                        startActivity(i);
 
                 }
             }

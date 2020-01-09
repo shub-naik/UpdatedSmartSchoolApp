@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/ParentNotifications"
+        android:icon="@drawable/bus_driver_current_location"
+        android:title="Notifications"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/Logout"
+        android:title="Logout"
+        app:showAsAction="never" />
+</menu>

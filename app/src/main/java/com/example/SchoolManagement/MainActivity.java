@@ -29,14 +29,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Shared Preferences for Bus Driver Login
+        pref = getSharedPreferences("BusDriversPreferences", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        if (pref.getString("BusDriverPhoneNumber", null) != null) {
+            Intent BusDriverIntent = new Intent(MainActivity.this, BusDriverMainIndexActivity.class);
+            startActivity(BusDriverIntent);
+        }
+
 
         //Shared Preferences for Parent's Login if Parents is Already Login.
         pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
+        editor = pref.edit();
 
 
-        if (pref.getString("ParentsPhon" +
-                "eNumber", null) != null) {
+        if (pref.getString("ParentsPhoneNumber", null) != null) {
             Intent ParentIntent = new Intent(MainActivity.this, ParentMainIndexActivity.class);
             startActivity(ParentIntent);
         }
@@ -84,10 +91,19 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(parent_intent);
                         break;
                     case "emergency leave login":
-                        Intent bus_tracking_intent = new Intent(MainActivity.this, EmergencyLeaveLoginActivity.class);
-                        startActivity(bus_tracking_intent);
+                        Intent emergency_leave_intent = new Intent(MainActivity.this, EmergencyLeaveLoginActivity.class);
+                        startActivity(emergency_leave_intent);
                         break;
                 }
+            }
+        });
+
+        LinearLayout linearLayout = findViewById(R.id.BusDriverLinearLayout);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bus_driver_login_intent = new Intent(MainActivity.this, BusTrackingActivity.class);
+                startActivity(bus_driver_login_intent);
             }
         });
 

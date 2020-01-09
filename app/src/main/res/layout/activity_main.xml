@@ -12,8 +12,34 @@
         android:id="@+id/HomeGridView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:numColumns="2"></GridView>
+        android:layout_margin="10dp"
+        android:numColumns="2" />
+
+    <LinearLayout
+        android:id="@+id/BusDriverLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/bus_tracking"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Bus Driver Login"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>
 
