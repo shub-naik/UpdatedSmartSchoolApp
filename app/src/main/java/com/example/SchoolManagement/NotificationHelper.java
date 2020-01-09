@@ -22,7 +22,7 @@ public class NotificationHelper {
                 .setContentText(body)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
-                .setPriority(Notification.PRIORITY_DEFAULT);
+                .setPriority(Notification.PRIORITY_HIGH);
 
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);

@@ -30,11 +30,11 @@ public class MyFirebaseInstanceIdService extends FirebaseMessagingService {
             NotificationHelper.DisplayNotification(MyFirebaseInstanceIdService.this, title, body);
 
         } else {
-
             String title = remoteMessage.getData().get("title");
             String body = remoteMessage.getData().get("message");
 
             NotificationHelper.DisplayNotification(MyFirebaseInstanceIdService.this, title, body);
         }
     }
+
 }
