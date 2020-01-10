@@ -16,6 +16,7 @@ import android.view.View;
 public class BusDriverMainIndexActivity extends AppCompatActivity {
 
     SharedPreferences pref;
+    String BusDriverPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class BusDriverMainIndexActivity extends AppCompatActivity {
 
         pref = getSharedPreferences("BusDriversPreferences", 0); // 0 - for private mode
         final SharedPreferences.Editor editor = pref.edit();
-        String BusDriverPhoneNumber = pref.getString("BusDriverPhoneNumber", null);
+        BusDriverPhoneNumber = pref.getString("BusDriverPhoneNumber", null);
 
         // Toolbar
         Toolbar t = findViewById(R.id.BusDriverMainIndexToolbar);
@@ -53,9 +54,15 @@ public class BusDriverMainIndexActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.Logout:
+            case R.id.BusDriverLogout:
                 pref.edit().remove("BusDriverPhoneNumber").commit();
                 startActivity(new Intent(BusDriverMainIndexActivity.this, MainActivity.class));
+                finish();
+                break;
+            case R.id.BusDriverCurrentLocation:
+                Intent intent = new Intent(BusDriverMainIndexActivity.this, BusDriverCurrentLocationActivity.class);
+                intent.putExtra("DriverPhoneNumber", BusDriverPhoneNumber);
+                startActivity(intent);
                 finish();
                 break;
         }

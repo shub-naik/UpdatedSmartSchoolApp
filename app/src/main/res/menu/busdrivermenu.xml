@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/ParentNotifications"
+        android:id="@+id/BusDriverCurrentLocation"
         android:icon="@drawable/bus_driver_current_location"
         android:title="Notifications"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/Logout"
+        android:id="@+id/BusDriverLogout"
         android:title="Logout"
         app:showAsAction="never" />
 </menu>
