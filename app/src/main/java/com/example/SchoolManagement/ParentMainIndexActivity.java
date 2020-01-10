@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -126,6 +128,10 @@ public class ParentMainIndexActivity extends AppCompatActivity {
                 pref.edit().remove("ParentsPhoneNumber").commit();
                 startActivity(new Intent(ParentMainIndexActivity.this, MainActivity.class));
                 finish();
+                break;
+            case R.id.GetDriversCurrentLocation:
+                Intent intent = new Intent(ParentMainIndexActivity.this, ParentGoogleMapActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ParentNotifications:
                 Log.e("Title", title);

@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,11 +37,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -56,12 +54,16 @@ public class BusDriverCurrentLocationActivity extends AppCompatActivity implemen
     private FusedLocationProviderClient fusedLocationProviderClient;
     private GoogleMap MGoogleMap;
     private LocationCallback locationCallback;
+    private ArrayList<Marker> MarkerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_driver_current_location);
         googleMapsFragment = findViewById(R.id.BusDriverGoogleMapFrameLayout);
+
+        // For Removing Old Markers
+        MarkerList = new ArrayList<>();
 
         final String DriverPhone = getIntent().getStringExtra("DriverPhoneNumber");
 
@@ -88,6 +90,8 @@ public class BusDriverCurrentLocationActivity extends AppCompatActivity implemen
                     if (addresses != null) {
                         Address address1 = addresses.get(0);
                         StringBuilder stringBuilder = new StringBuilder("");
+                        Log.e("IfMarker", MarkerList.size() + "");
+
 
                         for (int i = 0; i <= address1.getMaxAddressLineIndex(); i++) {
                             stringBuilder.append(address1.getAddressLine(i)).append("\n");
@@ -104,10 +108,22 @@ public class BusDriverCurrentLocationActivity extends AppCompatActivity implemen
 
                         ref.child(DriverPhone).setValue(map);
 
-                        MarkerOptions markerOptions = new MarkerOptions()
-                                .title(address)
-                                .position(new LatLng(latitude, longitude));
-                        MGoogleMap.addMarker(markerOptions);
+                        if (MarkerList.size() == 0) {
+                            MarkerOptions markerOptions = new MarkerOptions()
+                                    .title(address)
+                                    .position(new LatLng(latitude, longitude));
+                            Marker driver_marker = MGoogleMap.addMarker(markerOptions);
+                            MarkerList.add(driver_marker);
+                        } else {
+                            Marker remove_marker = MarkerList.get(0);
+                            remove_marker.remove();
+                            MarkerList.clear();
+                            MarkerOptions markerOptions = new MarkerOptions()
+                                    .title(address)
+                                    .position(new LatLng(latitude, longitude));
+                            Marker driver_marker = MGoogleMap.addMarker(markerOptions);
+                            MarkerList.add(driver_marker);
+                        }
                     }
                 } catch (Exception e) {
                     Toast.makeText(BusDriverCurrentLocationActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
