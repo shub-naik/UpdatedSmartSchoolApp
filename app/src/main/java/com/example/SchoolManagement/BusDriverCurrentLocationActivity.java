@@ -81,58 +81,26 @@ public class BusDriverCurrentLocationActivity extends AppCompatActivity implemen
                 double longitude = location.getLongitude();
                 double latitude = location.getLatitude();
 
-                String address = "";
-                Geocoder geocoder = new Geocoder(BusDriverCurrentLocationActivity.this, Locale.getDefault());
-
-                try {
-                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-
-                    if (addresses != null) {
-                        Address address1 = addresses.get(0);
-                        StringBuilder stringBuilder = new StringBuilder("");
-                        Log.e("IfMarker", MarkerList.size() + "");
-
-
-                        for (int i = 0; i <= address1.getMaxAddressLineIndex(); i++) {
-                            stringBuilder.append(address1.getAddressLine(i)).append("\n");
-                        }
-                        address = stringBuilder.toString();
-
-                        // Storing the login drivers current location.
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("DriversLocationUpdates");
-
-                        // Hash Map for Storing Drivers Location Updates.
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("Driver Phone", DriverPhone);
-                        map.put("Location", address);
-
-                        ref.child(DriverPhone).setValue(map);
-
-                        if (MarkerList.size() == 0) {
-                            MarkerOptions markerOptions = new MarkerOptions()
-                                    .title(address)
-                                    .position(new LatLng(latitude, longitude));
-                            Marker driver_marker = MGoogleMap.addMarker(markerOptions);
-                            MarkerList.add(driver_marker);
-                        } else {
-                            Marker remove_marker = MarkerList.get(0);
-                            remove_marker.remove();
-                            MarkerList.clear();
-                            MarkerOptions markerOptions = new MarkerOptions()
-                                    .title(address)
-                                    .position(new LatLng(latitude, longitude));
-                            Marker driver_marker = MGoogleMap.addMarker(markerOptions);
-                            MarkerList.add(driver_marker);
-                        }
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(BusDriverCurrentLocationActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                }
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .title("Current Position")
+                        .position(new LatLng(latitude, longitude));
+                Marker driver_marker = MGoogleMap.addMarker(markerOptions);
+                MarkerList.add(driver_marker);
 
                 LatLng latLng = new LatLng(latitude, longitude);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
                 MGoogleMap.moveCamera(cameraUpdate);
                 MGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("DriversLocationUpdates");
+
+                // Hash Map for Storing Drivers Location Updates.
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("Driver Phone", DriverPhone);
+                map.put("Latitude", latitude);
+                map.put("Longitude", longitude);
+
+                ref.child(DriverPhone).setValue(map);
             }
         };
 
