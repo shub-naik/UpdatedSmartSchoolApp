@@ -9,9 +9,7 @@
     </style>
 
     <!-- For Splash Screen -->
-    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_splash</item>
-    </style>
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <!-- Only NoActionBar Theme For Login Screen -->
     <style name="LoginScreen" parent="Theme.AppCompat.Light.NoActionBar" />

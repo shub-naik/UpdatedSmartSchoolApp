@@ -10,7 +10,7 @@
         android:id="@+id/LTeacherLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.SchoolManagement.TeacherActivity">
+        tools:context="com.pragyatitsolutions.SchoolManagement.TeacherActivity">
 
         <FrameLayout
             android:id="@+id/TeacherFrameContainer"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.SchoolManagement">
+    package="com.pragyatitsolutions.SchoolManagement">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,52 +13,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ParentGoogleMapActivity"></activity>
-        <activity android:name=".BusDriverCurrentLocationActivity" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.ParentGoogleMapActivity"></activity>
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.BusDriverCurrentLocationActivity" />
         <activity
-            android:name=".BusDriverMainIndexActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.BusDriverMainIndexActivity"
             android:theme="@style/ParentMainIndex" />
-        <activity android:name=".BusManagementActivity" />
-        <activity android:name=".ShowHomeWorkActivity" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.BusManagementActivity" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.ShowHomeWorkActivity" />
         <activity
-            android:name=".ParentMainIndexActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.ParentMainIndexActivity"
             android:theme="@style/ParentMainIndex" />
         <activity
-            android:name=".TeacherMainIndexActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.TeacherMainIndexActivity"
             android:theme="@style/EmergencyLeave" />
         <activity
-            android:name=".EmergencyLeaveMainIndexActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.EmergencyLeaveMainIndexActivity"
             android:theme="@style/EmergencyLeave" />
-        <activity android:name=".EmergencyLeaveSignupActivity" />
-        <activity android:name=".EmergencyLeaveLoginActivity" />
-        <activity android:name=".AddStudent" />
-        <activity android:name=".StudentManagement" />
-        <activity android:name=".DeleteTeacher" />
-        <activity android:name=".ViewTeacher" />
-        <activity android:name=".UpdateTeacher" />
-        <activity android:name=".AddTeacher" />
-        <activity android:name=".TeacherManagement" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.EmergencyLeaveSignupActivity" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.AddStudent" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.StudentManagement" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.DeleteTeacher" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.ViewTeacher" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.UpdateTeacher" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.AddTeacher" />
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.TeacherManagement" />
         <activity
-            android:name=".AdminIndex"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.pragyatitsolutions.SchoolManagement.AdminIndex"
+            android:parentActivityName="com.pragyatitsolutions.SchoolManagement.MainActivity" />
         <activity
-            android:name=".ParentActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.ParentActivity"
+            android:parentActivityName="com.pragyatitsolutions.SchoolManagement.MainActivity"
             android:theme="@style/LoginScreen" />
         <activity
-            android:name=".BusTrackingActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.BusTrackingActivity"
+            android:parentActivityName="com.pragyatitsolutions.SchoolManagement.MainActivity"
             android:theme="@style/LoginScreen" />
         <activity
-            android:name=".TeacherActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.TeacherActivity"
+            android:parentActivityName="com.pragyatitsolutions.SchoolManagement.MainActivity"
             android:theme="@style/LoginScreen" />
         <activity
-            android:name=".AdminActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.pragyatitsolutions.SchoolManagement.AdminActivity"
+            android:parentActivityName="com.pragyatitsolutions.SchoolManagement.MainActivity"
             android:theme="@style/LoginScreen" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.pragyatitsolutions.SchoolManagement.SplashScreen"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,7 +65,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.pragyatitsolutions.SchoolManagement.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,13 +73,13 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".MyFirebaseInstanceIdService">
+        <service android:name="com.pragyatitsolutions.SchoolManagement.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".MyFirebaseMessagingServices"
+            android:name="com.pragyatitsolutions.SchoolManagement.MyFirebaseMessagingServices"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.SchoolManagement.EmergencyLeaveSignupActivity">
+    tools:context="com.pragyatitsolutions.SchoolManagement.EmergencyLeaveSignupActivity">
 
 
     <ImageView
@@ -24,18 +24,21 @@
         android:inputType="phone" />
 
     <EditText
-        android:id="@+id/EmergencyLeaveSignupEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Your Email Address" />
-
-    <EditText
-        android:id="@+id/EmergencyLeaveSignupPassword"
+        android:id="@+id/EmergencyLeaveSignupName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="Enter Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/EmergencyLeaveSignupRemarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Remarks"
+        android:inputType="text" />
+
 
     <Button
         android:id="@+id/EmergencyLeaveSignupButton"

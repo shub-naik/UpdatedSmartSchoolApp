@@ -79,6 +79,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98405520963:android:2edd99667ae6dcb3be66f6",
+        "android_client_info": {
+          "package_name": "com.pragyatitsolutions.internshipprojectday1homescreen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98405520963-bs2k1f0b13v6didb29jjlqgr7lhacgp1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pragyatitsolutions.internshipprojectday1homescreen",
+            "certificate_hash": "0bef717a8fd9078d4fb1e102f435e5598720443b"
+          }
+        },
+        {
+          "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA_6jD1t7EVR7pt0TWBZJi9kRuv72YI5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
