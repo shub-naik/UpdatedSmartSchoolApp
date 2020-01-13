@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -87,14 +89,19 @@ public class AddTeacher extends AppCompatActivity {
     }
 
     public void AddTeacher() {
+
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Adding Data, Please Wait ....");
+        progressDialog.show();
+
         final String email = Email.getText().toString().trim();
         final String password = Password.getText().toString().trim();
         final String username = Username.getText().toString().trim();
         final String phone = PhoneNumber.getText().toString().trim();
-        if (email == null || password == null || username == null || phone == null || imageuri == null) {
+        if (email.isEmpty() || password.isEmpty() || username.isEmpty() || phone.isEmpty() || imageuri.toString().isEmpty()) {
             Toast.makeText(this, "All Fields Are Mandatory", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         } else {
-
             final StorageReference riversRef = mStorageRef.child(phone);
 
             riversRef.putFile(imageuri)
@@ -114,6 +121,8 @@ public class AddTeacher extends AppCompatActivity {
                                     DatabaseReference id = reference.child(phone);
                                     Teacher teacher = new Teacher(username, email, password, phone, downloadUrl.toString());
                                     id.setValue(teacher);
+                                    Toast.makeText(AddTeacher.this, "Teacher Data Added Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(AddTeacher.this, TeacherManagement.class));
                                 }
 
                             });
@@ -123,10 +132,12 @@ public class AddTeacher extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
                             Toast.makeText(AddTeacher.this, "Failure Occured while Uploading the Data......", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(AddTeacher.this, TeacherManagement.class));
                         }
                     });
-
+            progressDialog.dismiss();
         }
+        progressDialog.dismiss();
     }
 
     // Checking for Permissions Such as Read And Write for getting Access to the Image Part in Gallery or on Camera
