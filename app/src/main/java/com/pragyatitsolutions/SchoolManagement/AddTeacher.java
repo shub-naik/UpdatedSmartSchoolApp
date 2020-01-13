@@ -3,8 +3,12 @@ package com.pragyatitsolutions.SchoolManagement;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +28,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 public class AddTeacher extends AppCompatActivity {
-
 
     EditText Email, Username, Password, PhoneNumber;
     ImageView teacherimage;
@@ -53,10 +56,14 @@ public class AddTeacher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent variable for loading teacher image into the imageview.
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 10);
+                if (isReadStorageGranted()) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent, 10);
+                } else {
+                    requestReadStoragePermission();
+                }
             }
         });
 
@@ -121,4 +128,27 @@ public class AddTeacher extends AppCompatActivity {
 
         }
     }
+
+    // Checking for Permissions Such as Read And Write for getting Access to the Image Part in Gallery or on Camera
+    public boolean isReadStorageGranted() {
+        return (ContextCompat.checkSelfPermission(AddTeacher.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private void requestReadStoragePermission() {
+        ActivityCompat.requestPermissions(AddTeacher.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1010);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1010 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, 10);
+        } else {
+            Toast.makeText(this, "Permission Must be Granted For the App Functionality to work Properly", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
