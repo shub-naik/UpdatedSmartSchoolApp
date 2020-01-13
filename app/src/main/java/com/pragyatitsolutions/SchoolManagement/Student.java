@@ -2,12 +2,12 @@ package com.pragyatitsolutions.SchoolManagement;
 
 public class Student {
 
-    String token, imageuri, sname, sphone, sclass, ssection, sroll, saddress, smothername, email, password;
+    String DeviceId, token, imageuri, sname, sphone, sclass, ssection, sroll, saddress, smothername, email, password;
 
     public Student() {
     }
 
-    public Student(String token, String imageuri, String sname, String sphone, String sclass, String ssection, String sroll, String email, String saddress, String smothername, String password) {
+    public Student(String DeviceId, String token, String imageuri, String sname, String sphone, String sclass, String ssection, String sroll, String email, String saddress, String smothername, String password) {
         this.password = password;
         this.token = token;
         this.imageuri = imageuri;
@@ -19,6 +19,15 @@ public class Student {
         this.sroll = sroll;
         this.saddress = saddress;
         this.smothername = smothername;
+        this.DeviceId = DeviceId;
+    }
+
+    public String getDeviceId() {
+        return DeviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        DeviceId = deviceId;
     }
 
     public String getPassword() {

@@ -1,13 +1,18 @@
 package com.pragyatitsolutions.SchoolManagement;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.icu.text.CaseMap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,24 +28,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class ParentMainIndexActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     TextView txtAttendanceStatus;
-    Intent NotificationIntent;
-    String body = "";
-    String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_main_index);
-
-        NotificationIntent = getIntent();
-        title = NotificationIntent.getStringExtra("Title");
-        body = NotificationIntent.getStringExtra("Body");
 
         pref = getSharedPreferences("ParentsPreferences", 0); // 0 - for private mode
         final SharedPreferences.Editor editor = pref.edit();
@@ -63,10 +65,10 @@ public class ParentMainIndexActivity extends AppCompatActivity {
         txtAttendanceStatus = findViewById(R.id.TodayAttendanceStatus);
 
 
-        String ParentsPhone = pref.getString("ParentsPhoneNumber", null);
+        final String ParentsPhone = pref.getString("ParentsPhoneNumber", null);
 
-        String Classes = pref.getString("Classes", null);
-        String Section = pref.getString("Section", null);
+        final String Classes = pref.getString("Classes", null);
+        final String Section = pref.getString("Section", null);
         final String Roll_no = pref.getString("Roll_No", null);
         String TodaysDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.YEAR);
 
@@ -90,7 +92,6 @@ public class ParentMainIndexActivity extends AppCompatActivity {
                     txtAttendanceStatus.append("\n : Absent Today");
                     txtAttendanceStatus.setTextColor(Color.parseColor("#F44336"));
                 }
-
             }
 
             @Override
@@ -108,6 +109,32 @@ public class ParentMainIndexActivity extends AppCompatActivity {
             }
         });
 
+
+        // Getting The Device Id From Shared Preferences
+        final SharedPreferences pref1 = getSharedPreferences("TokenGenerated", 0);
+        final String DeviceID = pref1.getString("DeviceId", null);
+
+        if (DeviceID != null && ParentsPhone != null) {
+            final DatabaseReference ref_token_update = FirebaseDatabase.getInstance().getReference("StudentsData");
+            ref_token_update.child(Classes).child(Section).orderByKey().equalTo(ParentsPhone).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() == 1) {
+                        for (DataSnapshot d1 : dataSnapshot.getChildren()) {
+                            Student s = d1.getValue(Student.class);
+                            if (DeviceID.equals(s.getDeviceId())) {
+                                ref_token_update.child(Classes).child(Section).child(ParentsPhone).child("token").setValue(pref1.getString("Token", ""));
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(ParentMainIndexActivity.this, "DataBase Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     // For Menu in the ToolBar
@@ -131,9 +158,50 @@ public class ParentMainIndexActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.ParentNotifications:
-                Log.e("Title", title);
-                Log.e("Title", body);
-                break;
+                Intent NotificationIntent = getIntent();
+                String title = NotificationIntent.getStringExtra("Title");
+                String body = NotificationIntent.getStringExtra("Body");
+                final String EmergencyPhoneForEmergencyStatusUpdate = NotificationIntent.getStringExtra("EmergencyPhoneNumber");
+                AlertDialog.Builder builder = new AlertDialog.Builder(ParentMainIndexActivity.this);
+                if (title != null && body != null) {
+                    builder.setTitle(title);
+                    builder.setMessage(body);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Todays Date
+                            LocalDate Today = LocalDate.of(Calendar.getInstance().get(Calendar.YEAR),
+                                    Calendar.getInstance().get(Calendar.MONTH) + 1,
+                                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                            final String TodaysDate = Today.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"));
+
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("EmergencyLeaveData");
+                            ref = ref.child(TodaysDate).child(EmergencyPhoneForEmergencyStatusUpdate);
+                            final DatabaseReference finalRef = ref;
+                            ref.orderByKey().equalTo("status").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    finalRef.child("status").setValue("Yes");
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                            Toast.makeText(ParentMainIndexActivity.this, "Yes Clicked!!!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(ParentMainIndexActivity.this, "Permission Denied!!!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.show();
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }

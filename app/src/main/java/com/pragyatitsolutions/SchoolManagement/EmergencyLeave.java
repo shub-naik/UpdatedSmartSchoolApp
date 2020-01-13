@@ -2,14 +2,31 @@ package com.pragyatitsolutions.SchoolManagement;
 
 public class EmergencyLeave {
 
-    String ImageUrl, phone, name, remarks, token;
+    String Status, ImageUrl, phone, name, remarks, parentsphone;
 
-    public EmergencyLeave(String ImageUrl, String phone, String name, String remarks, String token) {
+    public EmergencyLeave(String Status, String ImageUrl, String phone, String name, String remarks, String parentsphone) {
         this.ImageUrl = ImageUrl;
         this.phone = phone;
         this.name = name;
         this.remarks = remarks;
-        this.token = token;
+        this.parentsphone = parentsphone;
+        this.Status = Status;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getParentsphone() {
+        return parentsphone;
+    }
+
+    public void setParentsphone(String parentsphone) {
+        this.parentsphone = parentsphone;
     }
 
     public String getImageUrl() {
@@ -21,14 +38,6 @@ public class EmergencyLeave {
     }
 
     public EmergencyLeave() {
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getPhone() {

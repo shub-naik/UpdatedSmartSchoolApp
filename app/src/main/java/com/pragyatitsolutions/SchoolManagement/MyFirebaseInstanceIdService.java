@@ -1,6 +1,7 @@
 package com.pragyatitsolutions.SchoolManagement;
 
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -15,7 +16,11 @@ public class MyFirebaseInstanceIdService extends FirebaseMessagingService {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("TokenGenerated", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("Token", s); // Storing string
+
+        String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        editor.putString("Token", s); // Storing Token Generated
+        editor.putString("DeviceId", deviceId); // Storing Device's Id
 
         editor.commit(); // commit changes
     }
@@ -26,7 +31,6 @@ public class MyFirebaseInstanceIdService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
-
             NotificationHelper.DisplayNotification(MyFirebaseInstanceIdService.this, title, body);
 
         } else {

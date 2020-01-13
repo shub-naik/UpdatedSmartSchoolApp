@@ -44,7 +44,7 @@ public class AddStudent extends AppCompatActivity {
 
     Button add, GenerateOTPButton;
     ImageView image;
-    EditText phone, otpentered;
+    EditText phone, otpentered, Deviceid;
     Spinner classes, section;
     Uri imageuri;
     FirebaseAuth auth;
@@ -80,6 +80,7 @@ public class AddStudent extends AppCompatActivity {
         classes = findViewById(R.id.StudentClass);
         section = findViewById(R.id.StudentSection);
         add = findViewById(R.id.AddStudent);
+        Deviceid = findViewById(R.id.ParentDeviceId);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +185,7 @@ public class AddStudent extends AppCompatActivity {
                                                     // for Data Upload to the Database
                                                     Long RollNumber = dataSnapshot.getChildrenCount() + 1;
                                                     String RollNo = Long.toString(RollNumber);
-                                                    Student student = new Student(token, ImageDownloadUrl[0].toString(), sname.getText().toString(), p, c, s, RollNo, email.getText().toString(), studentaddress.getText().toString(), mothersname.getText().toString(), studentpassword.getText().toString());
+                                                    Student student = new Student(Deviceid.getText().toString(), token, ImageDownloadUrl[0].toString(), sname.getText().toString(), p, c, s, RollNo, email.getText().toString(), studentaddress.getText().toString(), mothersname.getText().toString(), studentpassword.getText().toString());
 
                                                     ref.child(c).child(s).child(p).setValue(student);
                                                 }

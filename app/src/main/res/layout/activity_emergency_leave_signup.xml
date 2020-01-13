@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/EmergencyLeaveCoordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.pragyatitsolutions.SchoolManagement.EmergencyLeaveSignupActivity">
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/EmergencyLeaveImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_photo_camera_black_24dp" />
-
-    <EditText
-        android:id="@+id/EmergencyLeaveSignupPhone"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Your 10 digit Phone Number"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/EmergencyLeaveSignupName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Name"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/EmergencyLeaveSignupRemarks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Remarks"
-        android:inputType="text" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.pragyatitsolutions.SchoolManagement.EmergencyLeaveSignupActivity">
 
 
-    <Button
-        android:id="@+id/EmergencyLeaveSignupButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Signup" />
-</LinearLayout>
+        <ImageView
+            android:id="@+id/EmergencyLeaveImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_photo_camera_black_24dp" />
+
+        <EditText
+            android:id="@+id/EmergencyLeaveSignupPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Your 10 digit Phone Number"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/EmergencyLeaveSignupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/EmergencyLeaveParentPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter The 10 Digit Parents Phone"
+            android:inputType="phone" />
+
+        <Spinner
+            android:id="@+id/EmergencyStudentsClasses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/classes" />
+
+        <Spinner
+            android:id="@+id/EmergencyStudentsSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/section" />
+
+        <EditText
+            android:id="@+id/EmergencyLeaveSignupRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Remarks"
+            android:inputType="text" />
+
+
+        <Button
+            android:id="@+id/EmergencyLeaveSignupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Signup" />
+    </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
