@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.pragyatitsolutions.SchoolManagement.UpdateStudent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Spinner
+        android:id="@+id/UpdateListStudentClasses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/classes" />
+
+    <Spinner
+        android:id="@+id/UpdateListStudentSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/section" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Update Student's List"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/UpdateStudentStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Students Present In the Database for the Current Section and Class"
+        android:textColor="@color/red"
+        android:textSize="15dp"
+        android:visibility="invisible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/UpdateStudentsListRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
