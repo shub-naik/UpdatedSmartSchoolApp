@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +37,30 @@ public class DeleteTeacher extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("TeachersPrimaryData");
+
+        // Display Loading Message if Internet Speed is Slow.
+        // Build an AlertDialog
+        final AlertDialog.Builder builder = new AlertDialog.Builder(DeleteTeacher.this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.progress_dialog_using_alert_dialog, null);
+        TextView title = dialogView.findViewById(R.id.AlertTitle);
+        TextView message = dialogView.findViewById(R.id.AlertMessage);
+        title.setText("Loading..");
+        message.setText("Data is Loading...");
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        final int[] flag = {0};
+        //AlertDialog Ends Here
+
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -43,13 +69,16 @@ public class DeleteTeacher extends AppCompatActivity {
                     AllTeachers.add(object);
                 }
 
+
                 TeacherDataAdapter adapter = new TeacherDataAdapter(DeleteTeacher.this, R.layout.allteachersdata, AllTeachers);
                 alteachers.setAdapter(adapter);
+                alertDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(DeleteTeacher.this, "Error Occured....", Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
             }
         });
 

@@ -29,7 +29,6 @@ public class TeacherManagement extends AppCompatActivity {
             }
         });
 
-
         //Updating Teacher and Adding the Subjects
         Update.setOnClickListener(new View.OnClickListener() {
             @Override
