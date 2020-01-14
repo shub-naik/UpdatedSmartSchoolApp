@@ -114,8 +114,8 @@ public class ViewStudent extends AppCompatActivity implements RecyclerViewClickI
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
                         list.add(d1.getValue(Student.class));
                     }
-
-                    adapter.notifyDataSetChanged();
+                    adapter = new StudentsListAdapter(list, ViewStudent.this, ViewStudent.this);
+                    recyclerView.setAdapter(adapter);
                     alertDialog.dismiss();
                 } else {
                     TextView status = findViewById(R.id.ViewStudentStatus);

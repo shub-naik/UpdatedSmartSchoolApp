@@ -111,7 +111,8 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
                         list.add(d1.getValue(Student.class));
                     }
-
+                    adapter = new StudentsListAdapter(list, DeleteStudent.this, DeleteStudent.this);
+                    recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     alertDialog.dismiss();
                 } else {
