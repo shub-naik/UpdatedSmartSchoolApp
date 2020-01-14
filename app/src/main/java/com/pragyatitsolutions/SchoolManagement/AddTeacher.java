@@ -2,6 +2,7 @@ package com.pragyatitsolutions.SchoolManagement;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,18 +91,32 @@ public class AddTeacher extends AppCompatActivity {
     }
 
     public void AddTeacher() {
+        // Alert Dialog Starts Here
+        // Build an AlertDialog
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AddTeacher.this);
 
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Adding Data, Please Wait ....");
-        progressDialog.show();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.progress_dialog_using_alert_dialog, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        //AlertDialog Ends Here
+
 
         final String email = Email.getText().toString().trim();
         final String password = Password.getText().toString().trim();
         final String username = Username.getText().toString().trim();
         final String phone = PhoneNumber.getText().toString().trim();
+
         if (email.isEmpty() || password.isEmpty() || username.isEmpty() || phone.isEmpty() || imageuri.toString().isEmpty()) {
             Toast.makeText(this, "All Fields Are Mandatory", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+            alertDialog.dismiss();
         } else {
             final StorageReference riversRef = mStorageRef.child(phone);
 
@@ -117,10 +133,10 @@ public class AddTeacher extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     Uri downloadUrl = uri;
                                     //Do what you want with the url
-                                    Toast.makeText(AddTeacher.this, "" + downloadUrl, Toast.LENGTH_SHORT).show();
                                     DatabaseReference id = reference.child(phone);
                                     Teacher teacher = new Teacher(username, email, password, phone, downloadUrl.toString());
                                     id.setValue(teacher);
+                                    alertDialog.dismiss();
                                     Toast.makeText(AddTeacher.this, "Teacher Data Added Successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(AddTeacher.this, TeacherManagement.class));
                                 }
@@ -135,9 +151,7 @@ public class AddTeacher extends AppCompatActivity {
                             startActivity(new Intent(AddTeacher.this, TeacherManagement.class));
                         }
                     });
-            progressDialog.dismiss();
         }
-        progressDialog.dismiss();
     }
 
     // Checking for Permissions Such as Read And Write for getting Access to the Image Part in Gallery or on Camera

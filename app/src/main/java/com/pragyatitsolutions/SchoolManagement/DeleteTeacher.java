@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,10 +73,10 @@ public class DeleteTeacher extends AppCompatActivity {
                                 ref2.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        for(DataSnapshot d : dataSnapshot.getChildren()){
+                                        for (DataSnapshot d : dataSnapshot.getChildren()) {
                                             DataSnapshot ref = d.child(phone);
-                                            Boolean b = d.child(phone).getKey()==phone;
-                                            if(b){
+                                            Boolean b = d.child(phone).getKey() == phone;
+                                            if (b) {
                                                 ref2.child(d.getKey()).child(phone).removeValue();
                                             }
                                         }
@@ -88,6 +89,9 @@ public class DeleteTeacher extends AppCompatActivity {
                                 });
 
                                 Toast.makeText(DeleteTeacher.this, phone + " Teacher Deleted", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(DeleteTeacher.this, TeacherManagement.class);
+                                startActivity(i);
+                                finish();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -100,7 +104,6 @@ public class DeleteTeacher extends AppCompatActivity {
                 //Setting the title manually
                 alert.setTitle("Delete Teacher ");
                 alert.show();
-
                 return false;
             }
         });
