@@ -2,6 +2,7 @@ package com.pragyatitsolutions.SchoolManagement;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +43,6 @@ import java.util.concurrent.TimeUnit;
 
 public class AddStudent extends AppCompatActivity {
 
-
     Button add, GenerateOTPButton;
     ImageView image;
     EditText phone, otpentered, Deviceid;
@@ -52,7 +53,6 @@ public class AddStudent extends AppCompatActivity {
     String verificationId;
     StorageReference mStorageRef;
     String token;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,12 +153,27 @@ public class AddStudent extends AppCompatActivity {
     private void AddDataToFirebase(Task<AuthResult> task) {
         if (task.isSuccessful()) {
 
+            // Show Dialog Box while Data is Adding to the Database.
+            // Build an AlertDialog
+            final AlertDialog.Builder builder = new AlertDialog.Builder(AddStudent.this);
+
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.progress_dialog_using_alert_dialog, null);
+
+            // Specify alert dialog is not cancelable/not ignorable
+            builder.setCancelable(false);
+
+            // Set the custom layout as alert dialog view
+            builder.setView(dialogView);
+
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            // Dialog Box Code Ends Here
+
             final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("StudentsData");
             final String p = phone.getText().toString();
             final String c = classes.getSelectedItem().toString();
-            Log.e("Classes", c);
             final String s = section.getSelectedItem().toString();
-            Log.e("Section", s);
 
             final EditText sname = findViewById(R.id.StudentName);
             final EditText email = findViewById(R.id.StudentEmail);
@@ -188,6 +203,7 @@ public class AddStudent extends AppCompatActivity {
                                                     Student student = new Student(Deviceid.getText().toString(), token, ImageDownloadUrl[0].toString(), sname.getText().toString(), p, c, s, RollNo, email.getText().toString(), studentaddress.getText().toString(), mothersname.getText().toString(), studentpassword.getText().toString());
 
                                                     ref.child(c).child(s).child(p).setValue(student);
+                                                    alertDialog.dismiss();
                                                 }
                                             });
                                         }
@@ -196,21 +212,21 @@ public class AddStudent extends AppCompatActivity {
                                         @Override
                                         public void onFailure(@NonNull Exception exception) {
                                             Toast.makeText(AddStudent.this, "Failure Occured while Uploading the Data......", Toast.LENGTH_SHORT).show();
+                                            alertDialog.dismiss();
                                         }
                                     });
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            alertDialog.dismiss();
                         }
                     }
             );
 
-
             Intent i = new Intent(AddStudent.this, AddStudent.class);
-            i.setFlags(i.FLAG_ACTIVITY_NEW_TASK | i.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
+            finish();
         } else {
             Toast.makeText(AddStudent.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
         }
