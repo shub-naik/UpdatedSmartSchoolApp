@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +40,22 @@ public class UpdateTeacher extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // Build an AlertDialog
+        final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(UpdateTeacher.this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.progress_dialog_using_alert_dialog, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        //AlertDialog Ends Here
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,10 +69,13 @@ public class UpdateTeacher extends AppCompatActivity {
 
                 TeacherDataAdapter adapter = new TeacherDataAdapter(UpdateTeacher.this, R.layout.allteachersdata, AllTeachers);
                 AllTeachersData.setAdapter(adapter);
+                alertDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(UpdateTeacher.this, "Database Error ....", Toast.LENGTH_SHORT).show();
+                alertDialog.dismiss();
             }
         });
     }
@@ -90,6 +110,12 @@ public class UpdateTeacher extends AppCompatActivity {
         LayoutInflater inflator = LayoutInflater.from(this);
         View view = inflator.inflate(R.layout.teacherupdatedialog, null, false);
 
+        builder.setView(view);
+        builder.setTitle("Updating Teacher.. " + phone);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
         // Id Linking
         classes = view.findViewById(R.id.Classes);
         section = view.findViewById(R.id.Section);
@@ -108,14 +134,10 @@ public class UpdateTeacher extends AppCompatActivity {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("TeacherSubjectsAndSections");
                 String id = ref.push().getKey();
                 ref.child(id).child(phone).setValue(t);
+                dialog.dismiss();
+                Toast.makeText(UpdateTeacher.this, "Teacher Data With Phone " + phone + " is Updated.", Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        builder.setView(view);
-        builder.setTitle("Updating Teacher.. " + phone);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }
