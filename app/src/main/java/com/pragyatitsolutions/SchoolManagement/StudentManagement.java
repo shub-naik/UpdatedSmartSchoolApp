@@ -51,13 +51,13 @@ public class StudentManagement extends AppCompatActivity {
 //            }
 //        });
 //
-//        delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(StudentManagement.this, DeleteStudent.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StudentManagement.this, DeleteStudent.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 }
