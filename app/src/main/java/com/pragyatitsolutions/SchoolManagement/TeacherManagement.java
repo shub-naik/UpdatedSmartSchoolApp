@@ -9,12 +9,6 @@ import android.widget.Button;
 
 public class TeacherManagement extends AppCompatActivity {
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> mah
     Button Add, Update, view, delete;
 
     @Override

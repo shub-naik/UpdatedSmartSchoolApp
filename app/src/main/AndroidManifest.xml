@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeleteStudent"></activity>
+        <activity android:name=".ViewStudent"></activity>
+        <activity android:name=".UpdateStudent" />
+        <activity android:name=".DeleteStudent" />
         <activity android:name=".ParentGoogleMapActivity" />
         <activity android:name=".BusDriverCurrentLocationActivity" />
         <activity

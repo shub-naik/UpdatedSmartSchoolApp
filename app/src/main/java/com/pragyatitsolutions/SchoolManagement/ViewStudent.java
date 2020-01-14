@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +21,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteStudent extends AppCompatActivity implements RecyclerViewClickInterface {
+public class ViewStudent extends AppCompatActivity implements RecyclerViewClickInterface {
 
     RecyclerView recyclerView;
     List<Student> list;
@@ -32,20 +34,20 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
     Spinner classes, section;
     StudentsListAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_student);
+        setContentView(R.layout.activity_view_student);
         list = new ArrayList<>();
 
         recyclerView = findViewById(R.id.StudentsListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new StudentsListAdapter(list, DeleteStudent.this, DeleteStudent.this);
+        adapter = new StudentsListAdapter(list, ViewStudent.this, ViewStudent.this);
         recyclerView.setAdapter(adapter);
 
-        classes = findViewById(R.id.ListStudentClasses);
-        section = findViewById(R.id.ListStudentSection);
-
+        classes = findViewById(R.id.ViewListStudentClasses);
+        section = findViewById(R.id.ViewListStudentSection);
         ref = FirebaseDatabase.getInstance().getReference("StudentsData");
         DisplayDataInRecyclerView();
 
@@ -73,11 +75,12 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
         });
     }
 
+
     private void DisplayDataInRecyclerView() {
 
         // Show Dialog Box while Data is Adding to the Database.
         // Build an AlertDialog
-        final AlertDialog.Builder builder = new AlertDialog.Builder(DeleteStudent.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewStudent.this);
 
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.progress_dialog_using_alert_dialog, null);
@@ -105,31 +108,29 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    TextView status = findViewById(R.id.StudentStatus);
+                    TextView status = findViewById(R.id.ViewStudentStatus);
                     status.setVisibility(View.INVISIBLE);
                     list.clear();
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
                         list.add(d1.getValue(Student.class));
                     }
-                    adapter = new StudentsListAdapter(list, DeleteStudent.this, DeleteStudent.this);
+                    adapter = new StudentsListAdapter(list, ViewStudent.this, ViewStudent.this);
                     recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
                     alertDialog.dismiss();
                 } else {
-                    TextView status = findViewById(R.id.StudentStatus);
+                    TextView status = findViewById(R.id.ViewStudentStatus);
                     status.setVisibility(View.VISIBLE);
                     alertDialog.dismiss();
                     list.clear();
-                    StudentsListAdapter adapter = new StudentsListAdapter(list, DeleteStudent.this, DeleteStudent.this);
+                    StudentsListAdapter adapter = new StudentsListAdapter(list, ViewStudent.this, ViewStudent.this);
                     recyclerView.setAdapter(adapter);
-                    Toast.makeText(DeleteStudent.this, "No Data Present in the Database to show", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewStudent.this, "No Data Present in the Database to show", Toast.LENGTH_SHORT).show();
                 }
                 alertDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
@@ -139,38 +140,37 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
 
         final Student s = list.get(position);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(
-                DeleteStudent.this);
-        builder.setTitle("Sample Alert");
-        builder.setMessage("Two Action Buttons Alert Dialog");
-        builder.setNegativeButton("NO",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                    }
-                });
-        builder.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("StudentsData");
-                        ref.child(s.getSclass()).child(s.getSsection()).child(s.getSphone()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    Toast.makeText(DeleteStudent.this, "Value Removed " + s.getSroll(), Toast.LENGTH_SHORT).show();
-                                    ref.removeValue();
-                                    adapter.notifyItemRemoved(position);
-                                }
-                            }
+        // Show Dialog Box while Data is Adding to the Database.
+        // Build an AlertDialog
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewStudent.this);
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Toast.makeText(DeleteStudent.this, "Database Error....", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-        builder.show();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.viewdeletestudentslertdalogbox, null);
+
+        ImageView imageView = dialogView.findViewById(R.id.ViewDeleteAlertDialogStudentImage);
+        Picasso.with(ViewStudent.this).load(s.getImageuri()).into(imageView);
+        TextView phone = dialogView.findViewById(R.id.ViewDeleteAlertDialogStudentParentPhone);
+        phone.append(s.getSphone());
+        TextView deviceid = dialogView.findViewById(R.id.ViewDeleteAlertDialogStudentDeviceId);
+        deviceid.append(s.getDeviceId());
+        TextView FatherName = dialogView.findViewById(R.id.ViewDeleteAlertDialogStudentFathersName);
+        FatherName.append(s.getSname());
+        TextView Password = dialogView.findViewById(R.id.ViewDeleteAlertDialogPassword);
+        Password.append(s.getPassword());
+        TextView Email = dialogView.findViewById(R.id.ViewDeleteAlertDialogEmail);
+        Email.append(s.getEmail());
+        TextView Address = dialogView.findViewById(R.id.ViewDeleteAlertDialogAddress);
+        Address.append(s.getSaddress());
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(true);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        // Dialog Box Code Ends Here
     }
+
 }

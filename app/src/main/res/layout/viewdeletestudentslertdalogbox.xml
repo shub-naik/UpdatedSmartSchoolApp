@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/ViewDeleteAlertDialogStudentImage"
+        android:layout_width="400dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/ViewDeleteAlertDialogStudentParentPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parent's Phone : " />
+
+    <TextView
+        android:id="@+id/ViewDeleteAlertDialogStudentDeviceId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parent's Phone Device Id : " />
+
+    <TextView
+        android:id="@+id/ViewDeleteAlertDialogStudentFathersName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Father's Name : " />
+
+    <TextView
+        android:id="@+id/ViewDeleteAlertDialogPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student's Password : " />
+
+    <TextView
+        android:id="@+id/ViewDeleteAlertDialogEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parent's Email : " />
+
+    <TextView
+        android:id="@+id/ViewDeleteAlertDialogAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Permanent Address : " />
+
+</LinearLayout>
