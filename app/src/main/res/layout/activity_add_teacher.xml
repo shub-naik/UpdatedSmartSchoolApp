@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/addteacherbg2"
     android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context="com.pragyatitsolutions.SchoolManagement.AddTeacher">
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="Add Teacher"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorPrimaryDark"
@@ -52,6 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Teacher Name" />
 
         <EditText
@@ -76,6 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Teacher Email" />
 
         <EditText
@@ -100,6 +104,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Teacher Password" />
 
         <EditText
@@ -123,6 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Teacher Phone Number" />
 
         <EditText
@@ -137,8 +143,12 @@
 
     <Button
         android:id="@+id/AddTeacher"
-        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/ToolbarColor"
+        android:background="@drawable/rounded_buttons"
         android:text="Add" />
 
 </LinearLayout>

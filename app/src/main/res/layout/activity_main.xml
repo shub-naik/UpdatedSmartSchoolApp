@@ -8,7 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_home"
+        android:background="@drawable/purplebg"
         android:orientation="vertical"
         tools:context=".MainActivity">
 
@@ -29,6 +29,14 @@
         android:gravity="center"
         android:text="Copyright@Pragyat IT Solutions Pvt Ltd"
         android:textColor="@color/blue" />
+
+    <ViewFlipper
+        android:id="@+id/vflipper"
+        android:layout_width="500dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="450dp" >
+
+    </ViewFlipper>
 
 </RelativeLayout>
 
