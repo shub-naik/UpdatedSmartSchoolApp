@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,15 @@ public class DeleteTeacher extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                TextView textView = findViewById(R.id.ListOfDeleteTeachersData);
+                if (!dataSnapshot.exists()) {
+                    textView.setText("No Data Present in the Database to show");
+                    textView.setTextColor(Color.RED);
+                    alertDialog.dismiss();
+                    return;
+                }
+
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     Teacher object = d.getValue(Teacher.class);
                     AllTeachers.add(object);

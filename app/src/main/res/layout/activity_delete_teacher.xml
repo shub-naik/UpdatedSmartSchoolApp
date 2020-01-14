@@ -7,9 +7,19 @@
     android:orientation="vertical"
     tools:context="com.pragyatitsolutions.SchoolManagement.DeleteTeacher">
 
+    <TextView
+        android:id="@+id/ListOfDeleteTeachersData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="List of Teachers Data"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp" />
+
     <ListView
         android:id="@+id/AllTeachersData"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
