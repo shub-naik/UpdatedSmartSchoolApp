@@ -9,7 +9,6 @@ import android.widget.Button;
 
 public class TeacherManagement extends AppCompatActivity {
 
-
     Button Add, Update, view, delete;
 
     @Override
@@ -27,7 +26,6 @@ public class TeacherManagement extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(TeacherManagement.this, AddTeacher.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -38,7 +36,6 @@ public class TeacherManagement extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(TeacherManagement.this, UpdateTeacher.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -47,7 +44,6 @@ public class TeacherManagement extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(TeacherManagement.this, ViewTeacher.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -56,7 +52,6 @@ public class TeacherManagement extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(TeacherManagement.this, DeleteTeacher.class);
                 startActivity(i);
-                finish();
             }
         });
     }
