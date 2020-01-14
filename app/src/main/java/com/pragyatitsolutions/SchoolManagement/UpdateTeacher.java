@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,10 @@ public class UpdateTeacher extends AppCompatActivity {
 
         // Set the custom layout as alert dialog view
         builder.setView(dialogView);
+        TextView title = dialogView.findViewById(R.id.AlertTitle);
+        TextView message = dialogView.findViewById(R.id.AlertMessage);
+        title.setText("Loading..");
+        message.setText("Data is Loading...");
 
         final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -59,6 +64,14 @@ public class UpdateTeacher extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    TextView textView = findViewById(R.id.ListOfTeachersData);
+                    textView.setText("No Data Present in the Database to show for the teachers section");
+                    textView.setTextColor(Color.RED);
+                    alertDialog.dismiss();
+                    return;
+                }
 
                 AllTeachers.clear();
 

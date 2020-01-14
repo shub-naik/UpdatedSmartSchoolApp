@@ -139,6 +139,7 @@ public class AddTeacher extends AppCompatActivity {
                                     alertDialog.dismiss();
                                     Toast.makeText(AddTeacher.this, "Teacher Data Added Successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(AddTeacher.this, TeacherManagement.class));
+                                    finish();
                                 }
 
                             });
