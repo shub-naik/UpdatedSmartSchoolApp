@@ -32,25 +32,25 @@ public class StudentManagement extends AppCompatActivity {
         });
 
 
-//        //Updating Teacher and Adding the Subjects
-//        Update.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(StudentManagement.this, UpdateStudent.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-//
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(StudentManagement.this, ViewStudent.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-//
+        //Updating Teacher and Adding the Subjects
+        Update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StudentManagement.this, UpdateStudent.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StudentManagement.this, ViewStudent.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
