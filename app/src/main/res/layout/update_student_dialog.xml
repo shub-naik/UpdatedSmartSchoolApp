@@ -11,12 +11,6 @@
         android:hint="Enter the Name" />
 
     <EditText
-        android:id="@+id/UpdateAlertDialogPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Student's Parent Phone" />
-
-    <EditText
         android:id="@+id/UpdateAlertDialogPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,8 +20,7 @@
         android:id="@+id/UpdateAlertDialogAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter the Address"
-        android:inputType="textPassword" />
+        android:hint="Enter the Address" />
 
     <Button
         android:id="@+id/UpdateStudentButton"

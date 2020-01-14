@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -161,19 +162,23 @@ public class UpdateStudent extends AppCompatActivity implements RecyclerViewClic
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        EditText name = dialogView.findViewById(R.id.UpdateAlertDialogName);
+        final EditText name = dialogView.findViewById(R.id.UpdateAlertDialogName);
         name.setText(s.getSname());
-        EditText phone = dialogView.findViewById(R.id.UpdateAlertDialogPhone);
-        phone.setText(s.getSphone());
-        EditText address = dialogView.findViewById(R.id.UpdateAlertDialogAddress);
+        final EditText address = dialogView.findViewById(R.id.UpdateAlertDialogAddress);
         address.setText(s.getSaddress());
-        EditText password = dialogView.findViewById(R.id.UpdateAlertDialogPassword);
+        final EditText password = dialogView.findViewById(R.id.UpdateAlertDialogPassword);
         password.setText(s.getPassword());
 
         Button update = dialogView.findViewById(R.id.UpdateStudentButton);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                s.setSname(name.getText().toString());
+                s.setSaddress(address.getText().toString());
+                s.setPassword(password.getText().toString());
+                ref.child(s.getSclass()).child(s.getSsection()).child(s.getSphone()).setValue(s);
+
+
                 alertDialog.dismiss();
                 Toast.makeText(UpdateStudent.this, "Value Updated", Toast.LENGTH_SHORT).show();
             }
