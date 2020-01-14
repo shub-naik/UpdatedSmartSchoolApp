@@ -19,6 +19,23 @@
         android:layout_height="wrap_content"
         android:entries="@array/section" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Student's List"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/StudentStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Students Present In the Database for the Current Section and Class"
+        android:textColor="@color/red"
+        android:textSize="15dp"
+        android:visibility="invisible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/StudentsListRecyclerView"
         android:layout_width="match_parent"

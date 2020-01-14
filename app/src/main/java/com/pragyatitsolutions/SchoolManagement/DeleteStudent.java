@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -77,6 +78,11 @@ public class DeleteStudent extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.progress_dialog_using_alert_dialog, null);
 
+        TextView title = dialogView.findViewById(R.id.AlertTitle);
+        TextView message = dialogView.findViewById(R.id.AlertMessage);
+        title.setText("Loading..");
+        message.setText("Data is Loading...");
+
         // Specify alert dialog is not cancelable/not ignorable
         builder.setCancelable(false);
 
@@ -95,6 +101,8 @@ public class DeleteStudent extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    TextView status = findViewById(R.id.StudentStatus);
+                    status.setVisibility(View.INVISIBLE);
                     list.clear();
                     for (DataSnapshot d1 : dataSnapshot.getChildren()) {
                         list.add(d1.getValue(Student.class));
@@ -105,6 +113,8 @@ public class DeleteStudent extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                     alertDialog.dismiss();
                 } else {
+                    TextView status = findViewById(R.id.StudentStatus);
+                    status.setVisibility(View.VISIBLE);
                     alertDialog.dismiss();
                     list.clear();
                     StudentsListAdapter adapter = new StudentsListAdapter(list, DeleteStudent.this);
