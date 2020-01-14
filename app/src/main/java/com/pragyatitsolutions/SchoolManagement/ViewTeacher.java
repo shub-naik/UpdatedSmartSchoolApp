@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 public class ViewTeacher extends AppCompatActivity {
 
     ImageView teacherimage;
-    TextView teachername, teacheremail, teacherpassword, teacherphone, subjectssections;
+    TextView teachername, teacheremail, teacherpassword, teacherphone, subjectssections, namelabel, emaillabel, passwordlabel, phonelabel;
     EditText phone;
     Button viewTeacher;
 
@@ -38,6 +38,11 @@ public class ViewTeacher extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("TeachersPrimaryData");
         reference_subjects = FirebaseDatabase.getInstance().getReference("TeacherSubjectsAndSections");
 
+        namelabel = findViewById(R.id.NameLabel);
+        emaillabel = findViewById(R.id.EmailLabel);
+        passwordlabel = findViewById(R.id.PasswordLabel);
+        phonelabel = findViewById(R.id.PhoneLabel);
+
         teacherimage = findViewById(R.id.TeacherImage);
         teachername = findViewById(R.id.Name);
         teacheremail = findViewById(R.id.Email);
@@ -50,86 +55,101 @@ public class ViewTeacher extends AppCompatActivity {
         viewTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final String p = phone.getText().toString();
+                if (!p.isEmpty()) {
 
-                final ProgressDialog progress = new ProgressDialog(ViewTeacher.this);
-                progress.setCancelable(false);
-                progress.setMessage("Loading Please Wait....");
-                progress.show();
-                ValueEventListener valueEventListener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
 
-                            //Retrieving Subjects of the Teacher.
-                            reference_subjects.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot childrens : dataSnapshot.getChildren()) {
-                                        for (DataSnapshot child : childrens.getChildren()) {
-                                            if (child.getKey().equals(p)) {
-                                                for(DataSnapshot d : child.getChildren()){
-                                                    if(d.getKey().equals("subject")){
-                                                        subjectssections.append("Subject: "+d.getValue());
-                                                        Log.e("ViewTeacherError.class",d.getValue()+"");
+                    final ProgressDialog progress = new ProgressDialog(ViewTeacher.this);
+                    progress.setCancelable(false);
+                    progress.setMessage("Loading Please Wait....");
+                    progress.show();
+                    ValueEventListener valueEventListener = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+
+                                //Retrieving Subjects of the Teacher.
+                                reference_subjects.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot childrens : dataSnapshot.getChildren()) {
+                                            for (DataSnapshot child : childrens.getChildren()) {
+                                                if (child.getKey().equals(p)) {
+                                                    for (DataSnapshot d : child.getChildren()) {
+                                                        if (d.getKey().equals("subject")) {
+                                                            subjectssections.append("Subject: " + d.getValue());
+                                                            Log.e("ViewTeacherError.class", d.getValue() + "");
+                                                        } else if (d.getKey().equals("classes")) {
+                                                            subjectssections.append("Class: " + d.getValue());
+                                                            Log.e("ViewTeacherError.class", d.getValue() + "");
+                                                        } else if (d.getKey().equals("section")) {
+                                                            subjectssections.append("Section: " + d.getValue());
+                                                            Log.e("ViewTeacherError.class", d.getValue() + "");
+                                                        }
+                                                        subjectssections.append("\n");
                                                     }
-                                                    else if(d.getKey().equals("classes")){
-                                                        subjectssections.append("Class: "+d.getValue());
-                                                        Log.e("ViewTeacherError.class",d.getValue()+"");
-                                                    }
-                                                    else if(d.getKey().equals("section")){
-                                                        subjectssections.append("Section: "+d.getValue());
-                                                        Log.e("ViewTeacherError.class",d.getValue()+"");
-                                                    }
-                                                    subjectssections.append("\n");
                                                 }
                                             }
                                         }
                                     }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+                                for (DataSnapshot d : dataSnapshot.getChildren()) {
+
+                                    namelabel.setVisibility(View.VISIBLE);
+                                    emaillabel.setVisibility(View.VISIBLE);
+                                    passwordlabel.setVisibility(View.VISIBLE);
+                                    phonelabel.setVisibility(View.VISIBLE);
+
+                                    teacherimage.setVisibility(View.VISIBLE);
+                                    teachername.setVisibility(View.VISIBLE);
+                                    teacheremail.setVisibility(View.VISIBLE);
+                                    teacherpassword.setVisibility(View.VISIBLE);
+                                    teacherphone.setVisibility(View.VISIBLE);
+                                    subjectssections.setVisibility(View.VISIBLE);
+                                    Teacher t = d.getValue(Teacher.class);
+                                    teachername.setText(t.getName());
+                                    teacheremail.setText(t.getEmail());
+                                    teacherpassword.setText(t.getPassword());
+                                    teacherphone.setText(t.getPhone());
+                                    Picasso.with(ViewTeacher.this).load(t.getImageuri()).into(teacherimage);
                                 }
+                                progress.dismiss();
+                            } else {
+                                progress.dismiss();
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                namelabel.setVisibility(View.INVISIBLE);
+                                emaillabel.setVisibility(View.INVISIBLE);
+                                passwordlabel.setVisibility(View.INVISIBLE);
+                                phonelabel.setVisibility(View.INVISIBLE);
 
-                                }
-                            });
-
-
-                            for (DataSnapshot d : dataSnapshot.getChildren()) {
-                                teacherimage.setVisibility(View.VISIBLE);
-                                teachername.setVisibility(View.VISIBLE);
-                                teacheremail.setVisibility(View.VISIBLE);
-                                teacherpassword.setVisibility(View.VISIBLE);
-                                teacherphone.setVisibility(View.VISIBLE);
-                                subjectssections.setVisibility(View.VISIBLE);
-                                Teacher t = d.getValue(Teacher.class);
-                                teachername.setText(t.getName());
-                                teacheremail.setText(t.getEmail());
-                                teacherpassword.setText(t.getPassword());
-                                teacherphone.setText(t.getPhone());
-                                Picasso.with(ViewTeacher.this).load(t.getImageuri()).into(teacherimage);
+                                teacherimage.setVisibility(View.INVISIBLE);
+                                teachername.setVisibility(View.INVISIBLE);
+                                teacherphone.setVisibility(View.INVISIBLE);
+                                teacherpassword.setVisibility(View.INVISIBLE);
+                                teacheremail.setVisibility(View.INVISIBLE);
+                                subjectssections.setVisibility(View.INVISIBLE);
+                                Toast.makeText(ViewTeacher.this, "Invalid Phone Number Entered", Toast.LENGTH_SHORT).show();
                             }
-                            progress.dismiss();
-                        } else {
-                            progress.dismiss();
-                            teacherimage.setVisibility(View.INVISIBLE);
-                            teachername.setVisibility(View.INVISIBLE);
-                            teacherphone.setVisibility(View.INVISIBLE);
-                            teacherpassword.setVisibility(View.INVISIBLE);
-                            teacheremail.setVisibility(View.INVISIBLE);
-                            subjectssections.setVisibility(View.INVISIBLE);
-                            Toast.makeText(ViewTeacher.this, "Invalid Phone Number Entered", Toast.LENGTH_SHORT).show();
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        progress.dismiss();
-                    }
-                };
-                Query query = reference.orderByChild("phone").equalTo(p);
-                query.addListenerForSingleValueEvent(valueEventListener);
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            progress.dismiss();
+                        }
+                    };
+                    Query query = reference.orderByChild("phone").equalTo(p);
+                    query.addListenerForSingleValueEvent(valueEventListener);
+                } else {
+                    Toast.makeText(ViewTeacher.this, "Please Enter The Phone Number of the Teacher To View It", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

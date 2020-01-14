@@ -114,7 +114,7 @@ public class AddTeacher extends AppCompatActivity {
         final String username = Username.getText().toString().trim();
         final String phone = PhoneNumber.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty() || username.isEmpty() || phone.isEmpty() || imageuri.toString().isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || username.isEmpty() || phone.isEmpty() || imageuri == null) {
             Toast.makeText(this, "All Fields Are Mandatory", Toast.LENGTH_SHORT).show();
             alertDialog.dismiss();
         } else {
@@ -125,7 +125,6 @@ public class AddTeacher extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // Get a URL to the uploaded content
-//                            Uri downloadUrl = taskSnapshot.getUploadSessionUri();
                             Task<Uri> downloadUrl = riversRef.getDownloadUrl();
 
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

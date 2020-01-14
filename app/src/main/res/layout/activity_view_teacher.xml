@@ -24,55 +24,127 @@
 
     <ImageView
         android:id="@+id/TeacherImage"
-        android:visibility="invisible"
-        android:layout_width="500dp"
+        android:layout_width="1000dp"
         android:layout_height="125dp"
+        android:visibility="invisible"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <TextView
-        android:id="@+id/Name"
-        android:visibility="invisible"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TeacherImage"
-        android:gravity="center"
-        android:text="Name" />
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/Email"
-        android:visibility="invisible"
+        <TextView
+            android:id="@+id/NameLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TeacherImage"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Teacher Name : "
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TeacherImage"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Name"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TeacherImage"
-        android:gravity="center"
-        android:text="Email" />
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/Password"
-        android:visibility="invisible"
+        <TextView
+            android:id="@+id/EmailLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Teacher Email : "
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/Email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Email"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TeacherImage"
-        android:gravity="center"
-        android:text="Password" />
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/Phone"
-        android:visibility="invisible"
+        <TextView
+            android:id="@+id/PasswordLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TeacherImage"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Password : "
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/Password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TeacherImage"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Password"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TeacherImage"
-        android:gravity="center"
-        android:text="Phone" />
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/PhoneLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TeacherImage"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Phone : "
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/Phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Phone"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
     <TextView
-        android:gravity="center_horizontal"
-        android:visibility="invisible"
         android:id="@+id/SubjectsSections"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text=""
-        />
+        android:visibility="invisible" />
 
 
 </LinearLayout>
