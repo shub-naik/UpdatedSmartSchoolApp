@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteStudent extends AppCompatActivity {
+public class DeleteStudent extends AppCompatActivity implements RecyclerViewClickInterface {
 
     RecyclerView recyclerView;
     List<Student> list;
     DatabaseReference ref;
     Spinner classes, section;
+    StudentsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class DeleteStudent extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.StudentsListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new StudentsListAdapter(list, DeleteStudent.this, DeleteStudent.this);
+        recyclerView.setAdapter(adapter);
 
         classes = findViewById(R.id.ListStudentClasses);
         section = findViewById(R.id.ListStudentSection);
@@ -108,8 +112,6 @@ public class DeleteStudent extends AppCompatActivity {
                         list.add(d1.getValue(Student.class));
                     }
 
-                    StudentsListAdapter adapter = new StudentsListAdapter(list, DeleteStudent.this);
-                    recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     alertDialog.dismiss();
                 } else {
@@ -117,7 +119,7 @@ public class DeleteStudent extends AppCompatActivity {
                     status.setVisibility(View.VISIBLE);
                     alertDialog.dismiss();
                     list.clear();
-                    StudentsListAdapter adapter = new StudentsListAdapter(list, DeleteStudent.this);
+                    StudentsListAdapter adapter = new StudentsListAdapter(list, DeleteStudent.this, DeleteStudent.this);
                     recyclerView.setAdapter(adapter);
                     Toast.makeText(DeleteStudent.this, "No Data Present in the Database to show", Toast.LENGTH_SHORT).show();
                 }
@@ -129,5 +131,45 @@ public class DeleteStudent extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void OnItemClick(final int position) {
+
+        final Student s = list.get(position);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                DeleteStudent.this);
+        builder.setTitle("Sample Alert");
+        builder.setMessage("Two Action Buttons Alert Dialog");
+        builder.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                });
+        builder.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("StudentsData");
+                        ref.child(s.getSclass()).child(s.getSsection()).child(s.getSphone()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    Toast.makeText(DeleteStudent.this, "Value Removed " + s.getSroll(), Toast.LENGTH_SHORT).show();
+                                    ref.removeValue();
+                                    adapter.notifyItemRemoved(position);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Toast.makeText(DeleteStudent.this, "Database Error....", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+        builder.show();
     }
 }
