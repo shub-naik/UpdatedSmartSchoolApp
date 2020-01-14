@@ -10,6 +10,8 @@ import android.widget.Button;
 public class TeacherManagement extends AppCompatActivity {
 
 
+
+
     Button Add, Update, view, delete;
 
     @Override
@@ -20,6 +22,8 @@ public class TeacherManagement extends AppCompatActivity {
         Update = findViewById(R.id.UpdateTeacher);
         view = findViewById(R.id.ViewTeacher);
         delete = findViewById(R.id.DeleteTeacher);
+
+        getSupportActionBar().setTitle("Teacher Management");
 
         //Adding the Teacher to the FireBase
         Add.setOnClickListener(new View.OnClickListener() {

@@ -11,8 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
+    ViewFlipper viewFlipper;
+    int[] img={R.drawable.school15,R.drawable.school13,R.drawable.school12};
 
     GridView home_grid_view;
     SharedPreferences pref;
@@ -26,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setTitle("Pragyat IT Solutions");
+
+        viewFlipper =findViewById(R.id.vflipper);
+
+        for (int i=0;i<img.length;i++){
+
+            flip_image(img[i]);
+        }
 
         //Shared Preferences for Bus Driver Login
         pref = getSharedPreferences("BusDriversPreferences", 0); // 0 - for private mode
@@ -86,6 +97,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void flip_image(int i) {
+        ImageView view=new ImageView(this);
+        view.setBackgroundResource(i);
+        viewFlipper.addView(view);
+        viewFlipper.setFlipInterval(5000);
+        viewFlipper.setAutoStart(true);
+
+        viewFlipper.setInAnimation(this,android.R.anim.slide_in_left);
+        viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
+
     }
 
 
