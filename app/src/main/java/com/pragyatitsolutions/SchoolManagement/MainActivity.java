@@ -11,8 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     GridView home_grid_view;
     SharedPreferences pref;
@@ -20,12 +24,15 @@ public class MainActivity extends AppCompatActivity {
     String users_text[] = {"Admin Login", "Teacher Login", "Parent Login", "Bus Driver Login"};
     int users_images[] = {R.drawable.admin, R.drawable.teacher, R.drawable.parent, R.drawable.bus_tracking};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setTitle("Pragyat IT Solutions");
+
+
 
         //Shared Preferences for Bus Driver Login
         pref = getSharedPreferences("BusDriversPreferences", 0); // 0 - for private mode
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     @Override

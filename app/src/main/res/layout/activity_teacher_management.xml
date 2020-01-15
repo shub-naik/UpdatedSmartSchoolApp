@@ -1,58 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/whitebgnew1"
     android:orientation="vertical"
     android:weightSum="2"
     tools:context="com.pragyatitsolutions.SchoolManagement.TeacherManagement">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/addteacher" />
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/deleteteacher" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginTop="130dp"
         android:weightSum="2">
 
         <Button
             android:id="@+id/AddTeacher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_buttons"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+
+
             android:text="Add Teacher"
-            android:layout_weight="1" />
+            />
 
         <Button
             android:id="@+id/DeleteTeacher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+
+            android:background="@drawable/rounded_buttons"
+
             android:text="Delete Teacher"
-            android:layout_weight="1" />
+            />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/updateicon" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/viewicon" />
+    </LinearLayout>
+
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:weightSum="2">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:orientation="horizontal">
 
-        <Button
+    <Button
             android:id="@+id/UpdateTeacher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Update Teacher"
-            android:layout_weight="1" />
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/rounded_buttons"
+        android:layout_marginTop="40dp"
+        android:text="Update Teacher"></Button>
 
         <Button
+
             android:id="@+id/ViewTeacher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_buttons"
             android:text="View Teacher"
-            android:layout_weight="1" />
+            android:layout_marginTop="40dp"
+            />
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

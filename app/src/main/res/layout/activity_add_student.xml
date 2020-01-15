@@ -107,6 +107,7 @@
             android:id="@+id/AddStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_buttons"
             android:text="Add Student" />
 
 
