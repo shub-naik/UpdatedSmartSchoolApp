@@ -141,8 +141,8 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
 
         AlertDialog.Builder builder = new AlertDialog.Builder(
                 DeleteStudent.this);
-        builder.setTitle("Sample Alert");
-        builder.setMessage("Two Action Buttons Alert Dialog");
+        builder.setTitle("Delete...");
+        builder.setMessage("Do u really want to delete student with Roll No :" + s.getSroll());
         builder.setNegativeButton("NO",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,

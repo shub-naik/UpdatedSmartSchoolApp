@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -35,11 +36,25 @@ public class UpdateStudent extends AppCompatActivity implements RecyclerViewClic
     DatabaseReference ref;
     Spinner classes, section;
     StudentsListAdapter adapter;
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_student);
+
+        // For refreshing The Recycler View
+        refreshLayout = findViewById(R.id.UpdateRefreshLayout);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                DisplayDataInRecyclerView();
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+        // Refreshing the Recycler View Ends here .
 
         list = new ArrayList<>();
 
