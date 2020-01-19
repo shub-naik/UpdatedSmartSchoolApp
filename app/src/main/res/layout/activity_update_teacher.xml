@@ -14,7 +14,10 @@
         android:layout_margin="10dp"
         android:gravity="center_horizontal"
         android:text="All Teacher's Primary Data"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"></TextView>
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#3b5998"
+        android:textStyle="bold"
+        ></TextView>
 
     <ListView
         android:id="@+id/AllTeachersData"

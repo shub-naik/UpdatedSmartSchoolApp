@@ -25,7 +25,11 @@
 
     <Button
         android:id="@+id/UpdateTeacher"
-        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:text="Update"
+        android:textColor="@color/ToolbarColor"
+        android:background="@drawable/rounded_buttons"/>
 </LinearLayout>

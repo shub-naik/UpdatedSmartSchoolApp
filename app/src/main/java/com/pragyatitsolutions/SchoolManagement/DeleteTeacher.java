@@ -33,6 +33,7 @@ public class DeleteTeacher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_teacher);
+        getSupportActionBar().setTitle("Delete Teacher");
 
         alteachers = findViewById(R.id.AllTeachersData);
 
