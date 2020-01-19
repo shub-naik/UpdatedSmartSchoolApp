@@ -64,7 +64,7 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
         // For Tool Bar
         // for ToolBar
         Toolbar t = findViewById(R.id.TeacherMainIndexToolbar);
-        t.setTitle("Teacher Name");
+        t.setTitle("Home Work & Attendance");
 
         setSupportActionBar(t);
 

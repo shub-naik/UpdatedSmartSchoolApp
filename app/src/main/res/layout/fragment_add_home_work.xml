@@ -48,15 +48,24 @@
 
             <Button
                 android:id="@+id/ChooseDeadline"
-                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_width="200dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_buttons"
+                android:textColor="@color/ToolbarColor"
+
                 android:inputType="date"
-                android:text="Choose Date" />
+                android:text="CHOOSE DATE" />
 
             <Button
                 android:id="@+id/HomeworkAdd"
-                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_width="200dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_buttons"
+                android:textColor="@color/ToolbarColor"
                 android:text="Add HomeWork" />
 
         </LinearLayout>

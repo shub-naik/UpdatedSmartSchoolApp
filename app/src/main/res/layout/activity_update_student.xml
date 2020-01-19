@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bggrey1"
     tools:context="com.pragyatitsolutions.SchoolManagement.UpdateStudent">
 
     <Spinner
@@ -24,8 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Update Student's List"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="#3b5998"
+        android:textSize="30dp"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/UpdateStudentStatus"

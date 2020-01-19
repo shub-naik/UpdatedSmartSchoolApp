@@ -36,7 +36,10 @@ public class DeleteStudent extends AppCompatActivity implements RecyclerViewClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_student);
+
+        getSupportActionBar().setTitle("Delete Student");
         list = new ArrayList<>();
+
 
         recyclerView = findViewById(R.id.StudentsListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

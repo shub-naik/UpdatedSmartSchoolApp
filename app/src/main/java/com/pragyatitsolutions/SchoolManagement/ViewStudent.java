@@ -39,6 +39,7 @@ public class ViewStudent extends AppCompatActivity implements RecyclerViewClickI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_student);
+        getSupportActionBar().setTitle("View Student");
         list = new ArrayList<>();
 
         recyclerView = findViewById(R.id.StudentsListRecyclerView);

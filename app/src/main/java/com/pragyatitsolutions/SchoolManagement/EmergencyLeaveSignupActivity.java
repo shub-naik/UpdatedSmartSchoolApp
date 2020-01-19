@@ -55,6 +55,7 @@ public class EmergencyLeaveSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_leave_signup);
+        getSupportActionBar().setTitle("Emergency Leave");
 
 
         Phone = findViewById(R.id.EmergencyLeaveSignupPhone);

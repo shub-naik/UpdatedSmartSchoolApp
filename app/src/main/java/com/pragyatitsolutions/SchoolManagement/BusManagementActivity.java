@@ -16,6 +16,8 @@ public class BusManagementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_management);
+
+        getSupportActionBar().setTitle("Bus Management");
         frameLayout = findViewById(R.id.BusManagementFrameContainer);
         addDriverCardView = findViewById(R.id.AddDriverCardView);
         deleteDriverCardView = findViewById(R.id.DeleteDriverCardView);

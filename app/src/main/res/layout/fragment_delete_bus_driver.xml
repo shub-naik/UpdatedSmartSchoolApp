@@ -16,8 +16,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Deleting Bus Driver"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="#3b5998"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/DeletingDriverPhoneNumber"
@@ -35,8 +36,12 @@
 
         <Button
             android:id="@+id/DeleteDriverButton"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColor="@color/ToolbarColor"
+            android:background="@drawable/rounded_buttons"
+            android:textStyle="bold"
             android:text="Delete Driver" />
 
     </LinearLayout>
