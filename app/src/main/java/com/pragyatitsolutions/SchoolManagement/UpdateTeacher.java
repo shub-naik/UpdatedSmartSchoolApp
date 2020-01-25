@@ -98,6 +98,7 @@ public class UpdateTeacher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_teacher);
         AllTeachersData = findViewById(R.id.AllTeachersData);
+        getSupportActionBar().setTitle("Update Teacher");
 
 
         reference = FirebaseDatabase.getInstance().getReference("TeachersPrimaryData");

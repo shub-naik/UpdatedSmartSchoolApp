@@ -45,6 +45,8 @@ public class AddTeacher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_teacher);
 
+        getSupportActionBar().setTitle("Add Teacher");
+
         reference = FirebaseDatabase.getInstance().getReference("TeachersPrimaryData");
         mStorageRef = FirebaseStorage.getInstance().getReference("TeacherImages/");
 

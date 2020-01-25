@@ -59,6 +59,8 @@ public class AddStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
 
+        getSupportActionBar().setTitle("Add Student");
+
         // For Otp
         otpentered = findViewById(R.id.AddStudentOTPReceived);
         GenerateOTPButton = findViewById(R.id.GetStudentOTP);

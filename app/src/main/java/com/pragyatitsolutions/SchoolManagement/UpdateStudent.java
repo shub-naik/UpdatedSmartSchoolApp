@@ -42,6 +42,7 @@ public class UpdateStudent extends AppCompatActivity implements RecyclerViewClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_student);
+        getSupportActionBar().setTitle("Update Student");
 
         // For refreshing The Recycler View
         refreshLayout = findViewById(R.id.UpdateRefreshLayout);

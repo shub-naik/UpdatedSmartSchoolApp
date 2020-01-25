@@ -17,8 +17,11 @@
 
     <Button
         android:id="@+id/ViewTeacher"
-        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/ToolbarColor"
+        android:background="@drawable/rounded_buttons"
         android:text="View Teacher"></Button>
 
 
@@ -27,6 +30,7 @@
         android:layout_width="1000dp"
         android:layout_height="125dp"
         android:visibility="invisible"
+
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <LinearLayout

@@ -34,6 +34,7 @@ public class ViewTeacher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_teacher);
+        getSupportActionBar().setTitle("View Teacher");
 
         reference = FirebaseDatabase.getInstance().getReference("TeachersPrimaryData");
         reference_subjects = FirebaseDatabase.getInstance().getReference("TeacherSubjectsAndSections");

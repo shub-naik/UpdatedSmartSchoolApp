@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bggrey1"
     tools:context="com.pragyatitsolutions.SchoolManagement.UpdateTeacher">
 
     <TextView
@@ -14,7 +15,11 @@
         android:layout_margin="10dp"
         android:gravity="center_horizontal"
         android:text="All Teacher's Primary Data"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"></TextView>
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#3b5998"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        ></TextView>
 
     <ListView
         android:id="@+id/AllTeachersData"

@@ -1,116 +1,34 @@
 {
   "project_info": {
-    "project_number": "98405520963",
-    "firebase_url": "https://fir-project1-e74d8.firebaseio.com",
-    "project_id": "fir-project1-e74d8",
-    "storage_bucket": "fir-project1-e74d8.appspot.com"
+    "project_number": "1059785531837",
+    "firebase_url": "https://pragyatsamrtschoolapp.firebaseio.com",
+    "project_id": "pragyatsamrtschoolapp",
+    "storage_bucket": "pragyatsamrtschoolapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:98405520963:android:6c5b8cb94d133f7abe66f6",
+        "mobilesdk_app_id": "1:1059785531837:android:5287059ba810697d9a72d4",
         "android_client_info": {
-          "package_name": "com.example.internshipprojectday1homescreen"
+          "package_name": "com.pragyatitsolutions.SchoolManagement"
         }
       },
       "oauth_client": [
         {
-          "client_id": "98405520963-ros4cps2ov6o4usn653cehrab08ci6gs.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.internshipprojectday1homescreen",
-            "certificate_hash": "0bef717a8fd9078d4fb1e102f435e5598720443b"
-          }
-        },
-        {
-          "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
+          "client_id": "1059785531837-1gd6a6jlf88u54eqrm9s6k1ns8mq6105.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBA_6jD1t7EVR7pt0TWBZJi9kRuv72YI5A"
+          "current_key": "AIzaSyDCZQ7eVbO6MOpDyEAIZr1hr5WTLqyXuUI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:98405520963:android:056e1cfead6789a8be66f6",
-        "android_client_info": {
-          "package_name": "com.example.updatedphoneauthfirebase"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "98405520963-qoh5evf7e2odmk2invmggkcoo3r7ov0q.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.updatedphoneauthfirebase",
-            "certificate_hash": "0bef717a8fd9078d4fb1e102f435e5598720443b"
-          }
-        },
-        {
-          "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBA_6jD1t7EVR7pt0TWBZJi9kRuv72YI5A"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:98405520963:android:2edd99667ae6dcb3be66f6",
-        "android_client_info": {
-          "package_name": "com.pragyatitsolutions.internshipprojectday1homescreen"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "98405520963-bs2k1f0b13v6didb29jjlqgr7lhacgp1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pragyatitsolutions.internshipprojectday1homescreen",
-            "certificate_hash": "0bef717a8fd9078d4fb1e102f435e5598720443b"
-          }
-        },
-        {
-          "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBA_6jD1t7EVR7pt0TWBZJi9kRuv72YI5A"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "98405520963-cmlgp9vg20rakh20npeeu5q4uablmc98.apps.googleusercontent.com",
+              "client_id": "1059785531837-1gd6a6jlf88u54eqrm9s6k1ns8mq6105.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

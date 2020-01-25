@@ -25,6 +25,8 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main_index);
 
+
+
         Intent i = getIntent();
         object = (Teacher) i.getSerializableExtra("TeacherObject");
 
@@ -35,6 +37,7 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
         // Checking Whether the admin is login or not.
         final String EMERGENCY_PHONE = pref.getString("TeacherPhoneNumber", null);
         editor = pref.edit();
+
 
 
         // From Here We will create Horizontal Scroll and Show the Teacher User 2 menu items
@@ -61,7 +64,7 @@ public class TeacherMainIndexActivity extends AppCompatActivity {
         // For Tool Bar
         // for ToolBar
         Toolbar t = findViewById(R.id.TeacherMainIndexToolbar);
-        t.setTitle("Teacher Main Index Page");
+        t.setTitle("Home Work & Attendance");
 
         setSupportActionBar(t);
 

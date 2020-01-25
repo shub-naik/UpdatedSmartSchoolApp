@@ -24,9 +24,12 @@
 
     <Button
         android:id="@+id/UpdateStudentButton"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/rounded_buttons"
+
         android:text="Update"
         android:textColor="@color/ToolbarColor" />Up
 

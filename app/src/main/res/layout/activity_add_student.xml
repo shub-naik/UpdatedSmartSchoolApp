@@ -93,7 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Get OTP"
-            android:textColor="@color/colorPrimaryDark" />
+            android:background="@drawable/rounded_buttons"
+            android:textColor="@color/ToolbarColor" />
 
         <EditText
             android:id="@+id/AddStudentOTPReceived"
@@ -108,7 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_buttons"
-            android:text="Add Student" />
+            android:text="Add Student"
+            android:textColor="@color/ToolbarColor"/>
 
 
     </LinearLayout>
